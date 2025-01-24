@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Cardo", serif;
+    color: rgba(255, 255, 255, 0.5);
+
+
+}
+
+body {
+    /* margin: 0; */
+    /* padding: 0; */
+    background-color: black;
+}
+
+
+.background-container {
+    width: 100%; /* Set the desired width of the image */
+    height: 700px; /* Set the desired height of the image */
+    margin: 3% auto; /* Center the image on the page */
+    background-image: url("https://live.staticflickr.com/65535/54248009683_1fbc31d7fd_k.jpg"); /* Replace with your image path */
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+}
+
+.gallery-container{
+    margin: 0 auto;
+    width: 95%;
+    /* min-height: 100vh; */
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 50px 1%;
+}
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+
+    grid-gap: 20px;
+
+}
+.gallery img{
+    width: 100%;
+}
+
+/* to remove the figure number in gallery */
+.lb-number {
+    display: none !important;
+  }
+
+
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.1);
+    /* font-size: 1.5vw; */
+    /* font-size: 12; */
+    padding: 20px 20px;
+    font-size: 1.1rem;
+}
+.menu a {
+    color: rgb(217, 218, 217);
+    text-decoration: none;
+    padding: 15px 20px;
+    margin: 0 10px;
+    transition: background-color 0.3s;
+    padding: 10px 10px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
+.menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(145, 75, 1);
+}
+
+.menu .gallery-menu a{
+    color: rgb(145, 75, 1);
+    font-size: 0.8rem;
+}
+
+/* .gallery-menu button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+} */
