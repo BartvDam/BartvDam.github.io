@@ -11,28 +11,30 @@
 }
 
 body {
-
+    font-size: 10%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* margin: 0; */
     /* padding: 0; */
     background-color: rgb(0, 0, 0);
-    padding-bottom: 60px; /* To ensure the content doesn't go under the footer */
+    padding-bottom: 0.1vh;/*60px; /* To ensure the content doesn't go under the footer */
 }
 
 html {
     scrollbar-width: none; 
-    font-size: 16px;
+    /* font-size: 16px; */
     /* scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);  */
     }
 
 header {
+    width: 95%;
+    margin: 0 auto;
     display: flex; /* Enable Flexbox */
     justify-content: flex-start; /* Make the title on the left */
     /* justify-content: space-between;  */
     align-items: center; /* Align items vertically in the center */
-    padding: 30px 60px; /* Optional: add padding for spacing */
+    padding: 30px 0; /* Optional: add padding for spacing */
 }
 
 .site-title {
@@ -45,10 +47,11 @@ header {
 }
 
 .content {
-    padding-top: 60px;  /* To ensure the content doesn't go under the header */
-    padding-bottom: 40px; /* To ensure the content doesn't go under the footer */
+    /*padding-top: 60px;  /* To ensure the content doesn't go under the header */
+    /*padding-bottom: 40px; /* To ensure the content doesn't go under the footer */
     height: 100%; /* Allow the content to fill the space */
     overflow-y: auto; /* Make the content scrollable */
+    overflow-x: auto; /* Allow horizontal scrolling if content overflows */
     padding-right: 17px; /* To compensate for the scrollbar width (16px + some margin) */
     box-sizing: border-box; /* Ensures padding is included in the element's total width */
 
@@ -56,19 +59,19 @@ header {
     animation: fadeIn 2s ease-out forwards; /* Animation to fade in */
   }
   
-.background-container {
-    width: 100%; /* Set the desired width of the image */
-    height: 700px; /* Set the desired height of the image */
-    margin: 1.7% auto; /* Center the image on the page */
-    background-image: url("https://live.staticflickr.com/65535/54248009683_1fbc31d7fd_k.jpg"); /* Replace with your image path */
+/* .background-container {
+    width: 100%; 
+    height: 700px; 
+    margin: 1.7% auto; 
+    background-image: url("https://live.staticflickr.com/65535/54248009683_1fbc31d7fd_k.jpg"); 
     background-size: contain; 
     background-repeat: no-repeat; 
     background-position: center; 
-}
+} */
 
 .gallery-container{
     margin: 0 auto;
-    width: 95%;
+    width: 95vw;
     /* min-height: 100vh; */
     /* display: flex; */
     align-items: center;
@@ -102,7 +105,7 @@ header {
 
 nav {
     position: absolute; /* Use absolute positioning */
-    left: 50%; /* Position it at the center horizontally */
+    left: 55%; /* Position it at the center horizontally */
     transform: translateX(-5%); /* Adjust by 50% of its width to center it */
 }
 
@@ -114,14 +117,16 @@ nav {
     background-color: rgba(0, 0, 0, 0.1);
     /* font-size: 1.5vw; */
     /* font-size: 12; */
-    padding: 20px 20px;
+    /* padding: 20px 20px; */
     font-size: 1.2rem;
 }
 .menu a {
     color: rgb(255, 255, 255);
     text-decoration: none;
-    padding: 15px 20px;
-    margin: 0 10px;
+    padding: 0px 0px;
+    /* padding: 10px 20px; */
+    margin: 0 1vw;
+    /* margin: 0 10px; */
     transition: background-color 0.3s;
     padding: 10px 10px;
     text-transform: uppercase;
@@ -133,10 +138,10 @@ nav {
     text-decoration: underline;
 }
 
-.menu .gallery-menu a{
+/* .menu .gallery-menu a{
     color: rgb(155, 99, 39);
     font-size: 0.8rem;
-}
+} */
 
 /* .gallery-menu button {
     padding: 8px 16px;
@@ -180,7 +185,7 @@ nav {
 
 .gallery-image-thumbnail-title .text {
 color: white;
-font-size: 32px;
+font-size: 3rem;
 text-align: center;
 padding: 10px;
 }
@@ -202,11 +207,12 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding: 20px 0;   
+    padding: 1.5vh 0 0.1vh;   
     text-align: center;
     z-index: 10; /* Keeps the footer on top */
+    font-size: 0.8rem;
   }
 
 @keyframes fadeIn {
