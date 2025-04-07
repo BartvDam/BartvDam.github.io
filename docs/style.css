@@ -6,8 +6,6 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 300; /* Regular weight */
     color: rgba(255, 255, 255, 0.8);
-
-
 }
 
 body {
@@ -28,13 +26,13 @@ html {
     }
 
 header {
-    width: 95%;
+    width: 90vw;
     margin: 0 auto;
     display: flex; /* Enable Flexbox */
     justify-content: flex-start; /* Make the title on the left */
     /* justify-content: space-between;  */
     align-items: center; /* Align items vertically in the center */
-    padding: 30px 0; /* Optional: add padding for spacing */
+    padding: 60px 0; /* Optional: add padding for spacing */
 }
 
 .site-title {
