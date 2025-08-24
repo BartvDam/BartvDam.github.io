@@ -9,7 +9,7 @@
 }
 
 body {
-    font-size: 10%;
+    /* font-size: 2rem; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -89,7 +89,7 @@ header {
 .gallery-gallery{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(50px,1fr));
-    grid-gap: 20px;
+    grid-gap: 1%;
 
 }
 .gallery-gallery img{
@@ -219,5 +219,22 @@ footer {
 }
 100% {
     opacity: 1; /* End with full opacity */
+}
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 20px 0;
+        width: 100vw;
+    }
+.site-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 10px;
 }
 }
