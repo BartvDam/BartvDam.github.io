@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Gallery
+needsGallery: false
+---
+<h1 class="page-heading">Gallery</h1>
+<p class="page-description">{{ site.description }}</p>
+<div class="tiles">
+  {% for category in categories %}
+    {% categoryTile category %}
+  {% endfor %}
+</div>

@@ -1,0 +1,19 @@
+---
+layout: base.njk
+pagination:
+  data: categories
+  size: 1
+  alias: category
+permalink: "gallery/{{ category.slug }}/index.html"
+needsGallery: true
+eleventyComputed:
+  title: "{{ category.title }}"
+  description: "{{ category.description }}"
+---
+<h1 class="page-heading">{{ category.title }}</h1>
+{% if category.description %}<p class="page-description">{{ category.description }}</p>{% endif %}
+<div class="justified-gallery">
+  {% for photo in category.photos %}
+    {% galleryItem photo %}
+  {% endfor %}
+</div>

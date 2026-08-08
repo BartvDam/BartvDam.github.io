@@ -1,0 +1,16 @@
+<header>
+  <div class="site-title">
+    <a href="/">{{ site.name }} <span class="accent">{{ site.tagline }}</span></a>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="site-nav">
+    <div class="menu">
+      {% for item in site.nav %}
+        {% set isActive = (page.url == item.url) or (item.url == "/" and page.url.startsWith("/gallery/")) %}
+        <a href="{{ item.url }}"{% if isActive %} class="active"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+</header>

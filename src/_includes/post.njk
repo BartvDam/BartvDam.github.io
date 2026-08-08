@@ -1,0 +1,8 @@
+---
+layout: base.njk
+---
+<article class="post-body">
+  <h1 class="page-heading">{{ title }}</h1>
+  <p class="post-meta">{{ date | readableDate }}</p>
+  {{ content | safe }}
+</article>
