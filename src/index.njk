@@ -1,12 +1,47 @@
 ---
 layout: base.njk
-title: Gallery
+title: Home
 needsGallery: false
 ---
-<h1 class="page-heading">Gallery</h1>
-<p class="page-description">{{ site.description }}</p>
-<div class="tiles">
+<div class="hero-full">
   {% for category in categories %}
-    {% categoryTile category %}
+    {% categoryDoor category %}
+    {% if not loop.last %}<span class="seam" aria-hidden="true"></span>{% endif %}
   {% endfor %}
+  <div class="hero-title">
+    <h1>{{ site.name }}</h1>
+    <p class="range"><span class="b">meters</span> ······ <span class="m">micrometers</span></p>
+  </div>
+</div>
+
+<div class="intro-section">
+  <!-- TODO: replace this placeholder bio -->
+  <p>I photograph two worlds. Out in the field it's birds and other wildlife —
+  herons in the polder, terns over the water, a robin holding still just long
+  enough. Back inside it's a light microscope and whatever fits on a slide:
+  diatoms, pollen, crystals.</p>
+  <p>Different subjects, same habit of looking — one measured in meters, the
+  other in micrometers. The blog covers the gear, the technique and the
+  lessons learned along the way.</p>
+</div>
+
+<div class="bstrip">
+  <div class="bs-head">
+    <h2>From the blog</h2>
+    <a class="more" href="/blog/">all posts →</a>
+  </div>
+  <div class="bs-grid">
+    {% for post in collections.postsByDate %}
+      {% if loop.index0 < 3 %}
+      <a class="post" href="{{ post.url }}">
+        <div class="pd">{{ post.data.date | readableDate }}</div>
+        <h3>{{ post.data.title }}</h3>
+        {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+      </a>
+      {% endif %}
+    {% endfor %}
+    {% if collections.postsByDate.length == 0 %}
+      <p class="page-description">No posts yet.</p>
+    {% endif %}
+  </div>
 </div>

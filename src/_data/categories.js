@@ -34,10 +34,12 @@ module.exports = function () {
     const meta = readJsonIfExists(path.join(folderPath, "meta.json"), {});
     const captions = readJsonIfExists(path.join(folderPath, "captions.json"), {});
 
+    // Newest first -- relies on filenames being date-prefixed (see README).
     const filenames = fs
       .readdirSync(folderPath)
       .filter((f) => IMAGE_EXTENSIONS.has(path.extname(f).toLowerCase()))
-      .sort();
+      .sort()
+      .reverse();
 
     const photos = filenames.map((filename) => ({
       absPath: path.join(folderPath, filename),
@@ -51,6 +53,7 @@ module.exports = function () {
       slug,
       title: meta.title || titleFromFilename(slug),
       description: meta.description || "",
+      accent: meta.accent || null,
       order: typeof meta.order === "number" ? meta.order : 999,
       cover: coverFilename ? path.join(folderPath, coverFilename) : null,
       photos,

@@ -1,10 +1,11 @@
+{% from "partials/icons.njk" import icon %}
 <footer>
   <div class="footer-content">
     <p>&copy; {{ currentYear }} {{ site.name }} — All rights reserved</p>
     {% if site.social.length %}
     <div class="social-media">
       {% for link in site.social %}
-        <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+        <a href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{{ icon(link.icon) | safe }}</a>
       {% endfor %}
     </div>
     {% endif %}

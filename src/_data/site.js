@@ -10,6 +10,7 @@ module.exports = {
     { label: "About", url: "/about/" },
   ],
   social: [
-    { label: "Flickr", url: "https://www.flickr.com/photos/199805804@N02/" },
+    { label: "Flickr", icon: "flickr", url: "https://www.flickr.com/photos/199805804@N02/" },
+    { label: "Instagram", icon: "instagram", url: "https://www.instagram.com/bart.vdam/" },
   ],
 };

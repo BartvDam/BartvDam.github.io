@@ -3,14 +3,21 @@
 // data-aspect-ratio attribute at build time -- no need to wait for images to
 // load to know how to lay them out.
 const TARGET_ROW_HEIGHT = 260;
-const MAX_LAST_ROW_HEIGHT_RATIO = 1.8;
 const GAP = 10;
+// Below this container width, drop row-packing entirely and stack photos in
+// a single full-width column instead -- trying to fit 2+ narrow columns on a
+// phone screen makes for awkward, cramped rows.
+const MOBILE_BREAKPOINT = 700;
 
-function layout(container) {
-  const items = Array.from(container.children);
-  const containerWidth = container.clientWidth;
-  if (!items.length || !containerWidth) return;
+function layoutSingleColumn(items, containerWidth) {
+  items.forEach((item) => {
+    const ratio = parseFloat(item.dataset.aspectRatio || "1.5");
+    item.style.width = `${containerWidth}px`;
+    item.style.height = `${containerWidth / ratio}px`;
+  });
+}
 
+function layoutJustified(items, containerWidth) {
   let row = [];
   let ratioSum = 0;
 
@@ -24,8 +31,10 @@ function layout(container) {
     let rowHeight = (containerWidth - totalGap) / rowRatioSum;
 
     if (isLastRow) {
-      // Don't blow up a short trailing row (e.g. the last 1-2 photos) to fill the width.
-      rowHeight = Math.min(rowHeight, TARGET_ROW_HEIGHT * MAX_LAST_ROW_HEIGHT_RATIO);
+      // Don't stretch a short trailing row (e.g. a single leftover photo) to
+      // fill the width -- keep it at the same height as the other rows
+      // instead, left-aligned with empty space after it.
+      rowHeight = Math.min(rowHeight, TARGET_ROW_HEIGHT);
     }
 
     rowItems.forEach((item) => {
@@ -49,6 +58,18 @@ function layout(container) {
   });
 
   flush(row, true);
+}
+
+function layout(container) {
+  const items = Array.from(container.children);
+  const containerWidth = container.clientWidth;
+  if (!items.length || !containerWidth) return;
+
+  if (containerWidth < MOBILE_BREAKPOINT) {
+    layoutSingleColumn(items, containerWidth);
+  } else {
+    layoutJustified(items, containerWidth);
+  }
 }
 
 function init() {

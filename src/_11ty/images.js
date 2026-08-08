@@ -93,6 +93,7 @@ async function getThumb(srcPath, alt) {
 
   return {
     html,
+    url: largestJpeg.url,
     aspectRatio: largestJpeg.width / largestJpeg.height,
     width: largestJpeg.width,
     height: largestJpeg.height,
