@@ -1,5 +1,32 @@
 {
-  "2026-01-05-diatom-frustule.jpg": { "title": "Diatom Frustule", "meta": ["400×", "NA 0.65", "Darkfield"] },
-  "2026-02-10-pollen-grains.jpg": { "title": "Pollen Grains", "meta": ["100×", "NA 0.25", "Brightfield"] },
-  "2026-03-01-quartz-crystal.jpg": { "title": "Quartz Crystal", "meta": ["40×", "NA 0.10", "Polarized light"] }
+  "2025-03-09-dagpauwoog-1.jpg": {
+    "title": "Dagpauwoog Wing Scales I",
+    "meta": ["100×", "NA 0.25", "Brightfield"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  },
+  "2025-03-09-dagpauwoog-2.jpg": {
+    "title": "Dagpauwoog Wing Scales II",
+    "meta": ["200×", "NA 0.40", "Darkfield"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  },
+  "2025-03-09-dagpauwoog-3.jpg": {
+    "title": "Dagpauwoog Wing Scales III",
+    "meta": ["400×", "NA 0.65", "Darkfield"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  },
+  "2025-03-09-dagpauwoog-4.jpg": {
+    "title": "Dagpauwoog Wing Scales IV",
+    "meta": ["400×", "NA 0.65", "Polarized light"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  },
+  "2025-07-24-vlaamse-gaai-veer.jpg": {
+    "title": "Vlaamse Gaai Veer",
+    "meta": ["100×", "NA 0.25", "Brightfield"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  },
+  "2025-08-30-zonnebloem-stamper.jpg": {
+    "title": "Zonnebloem Stamper",
+    "meta": ["40×", "NA 0.10", "Brightfield"],
+    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  }
 }

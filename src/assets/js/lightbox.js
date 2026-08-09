@@ -2,7 +2,9 @@ const lb = document.getElementById("lb");
 if (lb) {
   const items = Array.from(document.querySelectorAll(".justified-gallery .gallery-item"));
   const img = document.getElementById("lb-img");
-  const title = document.getElementById("lb-title");
+  const name = document.getElementById("lb-name");
+  const latin = document.getElementById("lb-latin");
+  const desc = document.getElementById("lb-desc");
   const count = document.getElementById("lb-count");
   let index = 0;
   let lastFocus = null;
@@ -11,8 +13,29 @@ if (lb) {
     const item = items[index];
     img.src = item.getAttribute("href");
     img.alt = item.dataset.title || "";
-    title.textContent = item.dataset.title || "";
     count.textContent = (index + 1) + " / " + items.length;
+
+    const nameParts = [item.dataset.nl, item.dataset.en].filter(Boolean);
+    name.textContent = nameParts.length ? nameParts.join(" · ") : (item.dataset.title || "");
+
+    if (item.dataset.latin) {
+      latin.textContent = item.dataset.latin;
+      latin.style.display = "";
+      // Tint the latin name with the category's own accent (inherited by
+      // the gallery item as --hl) so the lightbox echoes that gallery's color.
+      latin.style.color = getComputedStyle(item).getPropertyValue("--hl").trim();
+    } else {
+      latin.textContent = "";
+      latin.style.display = "none";
+    }
+
+    if (item.dataset.description) {
+      desc.textContent = item.dataset.description;
+      desc.style.display = "";
+    } else {
+      desc.textContent = "";
+      desc.style.display = "none";
+    }
   };
 
   const open = (i) => {

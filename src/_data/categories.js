@@ -42,9 +42,12 @@ module.exports = function () {
       .reverse();
 
     // captions.json entries can be a plain string (just a title) or an object
-    // { title, meta: [...] } -- meta is an ordered list of small overlay
-    // strings (focal length, aperture, magnification, whatever fits the
-    // category) shown on hover, joined with " · ".
+    // { title, meta: [...], nl, en, latin, description }. meta is an ordered
+    // list of small overlay strings (focal length, aperture, magnification,
+    // whatever fits the category) shown on hover, joined with " · ". The
+    // rest are optional and only used in the lightbox: nl/en become the
+    // "Dutch name · English name" heading, latin is shown in italic below
+    // it, and description below that.
     const photos = filenames.map((filename) => {
       const raw = captions[filename];
       const isRich = raw && typeof raw === "object";
@@ -53,6 +56,10 @@ module.exports = function () {
         filename,
         title: (isRich ? raw.title : raw) || titleFromFilename(filename),
         meta: (isRich && Array.isArray(raw.meta)) ? raw.meta : [],
+        nl: (isRich && raw.nl) || null,
+        en: (isRich && raw.en) || null,
+        latin: (isRich && raw.latin) || null,
+        description: (isRich && raw.description) || null,
       };
     });
 

@@ -21,7 +21,6 @@ needsGallery: false
 <div class="hero-full">
   {% for category in categories %}
     {% categoryDoor category %}
-    {% if not loop.last %}<span class="seam" aria-hidden="true"></span>{% endif %}
   {% endfor %}
 </div>
 

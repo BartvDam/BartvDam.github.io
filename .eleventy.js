@@ -20,24 +20,33 @@ module.exports = function (eleventyConfig) {
     return style;
   }
 
+  const esc = (str) => String(str).replace(/"/g, "&quot;");
+
   // Renders one gallery photo: responsive thumbnail markup + a plain link to
   // the capped/watermarked full-size version, which lightbox.js intercepts.
-  // On hover: an inset rectangle with colorful corner accents (via --hl,
-  // resolved per-theme from the category's accent) plus an overlay with the
-  // title and an optional line of small metadata (focal length, magnification,
-  // whatever fits the category).
+  // On hover: an inset rectangle with colorful corner accents plus an
+  // overlay with the title and an optional line of small metadata (focal
+  // length, magnification, whatever fits the category). The optional
+  // nl/en/latin/description fields ride along as data attributes purely for
+  // the lightbox's richer caption -- they don't affect the grid view.
   eleventyConfig.addAsyncShortcode("galleryItem", async function (photo) {
     const [thumb, full] = await Promise.all([getThumb(photo.absPath, photo.title), getFull(photo.absPath)]);
-    const title = photo.title.replace(/"/g, "&quot;");
 
     const captionLines = [`<span class="cap-title">${photo.title}</span>`];
     if (photo.meta && photo.meta.length) {
-      const metaText = photo.meta.join(" · ").replace(/"/g, "&quot;");
-      captionLines.push(`<span class="cap-meta">${metaText}</span>`);
+      captionLines.push(`<span class="cap-meta">${esc(photo.meta.join(" · "))}</span>`);
     }
 
-    return `<a class="gallery-item" href="${full.jpegUrl}"
-        data-aspect-ratio="${thumb.aspectRatio.toFixed(4)}" data-title="${title}">
+    const dataAttrs = [
+      `data-aspect-ratio="${thumb.aspectRatio.toFixed(4)}"`,
+      `data-title="${esc(photo.title)}"`,
+    ];
+    if (photo.nl) dataAttrs.push(`data-nl="${esc(photo.nl)}"`);
+    if (photo.en) dataAttrs.push(`data-en="${esc(photo.en)}"`);
+    if (photo.latin) dataAttrs.push(`data-latin="${esc(photo.latin)}"`);
+    if (photo.description) dataAttrs.push(`data-description="${esc(photo.description)}"`);
+
+    return `<a class="gallery-item" href="${full.jpegUrl}" ${dataAttrs.join(" ")}>
       <div class="ph">
         <div class="photo-inner">
           ${thumb.html}

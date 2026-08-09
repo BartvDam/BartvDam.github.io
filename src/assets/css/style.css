@@ -6,9 +6,9 @@
   --mut: #6e7268;
   --shadow: rgba(32, 38, 31, 0.12);
   --default-accent: #6e5a3d;
-  /* Rectangle stroke drawn over photos on hover -- semi-transparent so it
-     reads reasonably against most photo content, tuned per theme below. */
-  --frame-line: rgba(32, 38, 31, 0.6);
+  /* Vivid, fixed (not per-category) teal for the hover corner accents --
+     chosen specifically to stay clearly visible against most photo content. */
+  --corner-accent: #0d9488;
   --serif: "Fraunces", Georgia, serif;
   --sans: "Atkinson Hyperlegible", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -23,7 +23,7 @@ html[data-theme="dark"] {
   --mut: #98a09e;
   --shadow: rgba(0, 0, 0, 0.45);
   --default-accent: #c9b28a;
-  --frame-line: rgba(236, 232, 220, 0.65);
+  --corner-accent: #5eead4;
 }
 
 * {
@@ -288,15 +288,6 @@ nav {
   color: var(--hl, var(--default-accent));
 }
 
-.seam {
-  position: relative;
-  width: 1px;
-  background: var(--paper);
-  z-index: 3;
-  pointer-events: none;
-  transition: background 0.3s;
-}
-
 /* ---------- From the blog (homepage strip) ---------- */
 
 .bstrip {
@@ -369,41 +360,6 @@ nav {
 
 /* ---------- Gallery pages ---------- */
 
-.gal-head {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: end;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 20px;
-  margin-bottom: 40px;
-}
-
-.gal-head .page-heading {
-  margin: 0;
-}
-
-.gal-head .page-description {
-  margin: 0;
-  max-width: 48ch;
-}
-
-@media (max-width: 720px) {
-  .gal-head {
-    grid-template-columns: 1fr;
-  }
-}
-
-.page-heading .dot {
-  display: inline-block;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  margin-right: 12px;
-  vertical-align: 2px;
-  background: var(--hl, var(--default-accent));
-}
-
 .justified-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -457,7 +413,7 @@ nav {
 .hover-box {
   position: absolute;
   inset: 0;
-  border: 1px solid var(--frame-line);
+  border: 1px solid var(--line);
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
@@ -479,26 +435,26 @@ nav {
 .corner.tl {
   top: -1px;
   left: -1px;
-  border-top: 1px solid var(--hl, var(--default-accent));
-  border-left: 1px solid var(--hl, var(--default-accent));
+  border-top: 1px solid var(--corner-accent);
+  border-left: 1px solid var(--corner-accent);
 }
 .corner.tr {
   top: -1px;
   right: -1px;
-  border-top: 1px solid var(--hl, var(--default-accent));
-  border-right: 1px solid var(--hl, var(--default-accent));
+  border-top: 1px solid var(--corner-accent);
+  border-right: 1px solid var(--corner-accent);
 }
 .corner.bl {
   bottom: -1px;
   left: -1px;
-  border-bottom: 1px solid var(--hl, var(--default-accent));
-  border-left: 1px solid var(--hl, var(--default-accent));
+  border-bottom: 1px solid var(--corner-accent);
+  border-left: 1px solid var(--corner-accent);
 }
 .corner.br {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1px solid var(--hl, var(--default-accent));
-  border-right: 1px solid var(--hl, var(--default-accent));
+  border-bottom: 1px solid var(--corner-accent);
+  border-right: 1px solid var(--corner-accent);
 }
 
 .gallery-item-caption {
@@ -531,7 +487,7 @@ nav {
   font-family: var(--mono);
   font-size: 0.7rem;
   letter-spacing: 0.03em;
-  opacity: 0.85;
+  color: #ffd166;
   margin-top: 2px;
 }
 
@@ -721,10 +677,6 @@ footer {
   .door:hover {
     flex: 1;
   }
-
-  .seam {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -808,9 +760,31 @@ footer {
 
 .lb-cap {
   text-align: center;
-  padding: 8px 16px 10px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 14px 16px 6px;
+}
+
+.lb-name {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 600;
   color: #f2efe6;
+}
+
+.lb-latin {
+  font-family: var(--serif);
+  font-style: italic;
   font-size: 15px;
+  margin-top: 4px;
+  color: #f2efe6;
+}
+
+.lb-desc {
+  font-size: 13.5px;
+  color: #a6ab9e;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
 @media (max-width: 720px) {
