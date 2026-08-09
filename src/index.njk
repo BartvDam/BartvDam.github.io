@@ -3,26 +3,26 @@ layout: base.njk
 title: Home
 needsGallery: false
 ---
-<div class="hero-full">
-  {% for category in categories %}
-    {% categoryDoor category %}
-    {% if not loop.last %}<span class="seam" aria-hidden="true"></span>{% endif %}
-  {% endfor %}
-  <div class="hero-title">
-    <h1>{{ site.name }}</h1>
-    <p class="range"><span class="b">meters</span> ······ <span class="m">micrometers</span></p>
-  </div>
+<div class="hero-head">
+  <p class="eyebrow">photography · amsterdam</p>
+  <h1>{{ site.name }}</h1>
 </div>
 
-<div class="intro-section">
+<div class="intro-cols">
   <!-- TODO: replace this placeholder bio -->
   <p>I photograph two worlds. Out in the field it's birds and other wildlife —
   herons in the polder, terns over the water, a robin holding still just long
   enough. Back inside it's a light microscope and whatever fits on a slide:
   diatoms, pollen, crystals.</p>
-  <p>Different subjects, same habit of looking — one measured in meters, the
-  other in micrometers. The blog covers the gear, the technique and the
-  lessons learned along the way.</p>
+  <p>Different subjects, same habit of looking. The blog covers the gear, the
+  technique and the lessons learned along the way.</p>
+</div>
+
+<div class="hero-full">
+  {% for category in categories %}
+    {% categoryDoor category %}
+    {% if not loop.last %}<span class="seam" aria-hidden="true"></span>{% endif %}
+  {% endfor %}
 </div>
 
 <div class="bstrip">

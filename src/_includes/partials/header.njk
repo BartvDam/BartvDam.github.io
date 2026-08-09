@@ -1,12 +1,16 @@
 <header>
-  <a class="brand" href="/">{{ site.name }}</a>
-  <nav>
-    <div class="menu">
-      {% for item in site.nav %}
-        {% set isActive = (page.url == item.url) or (item.url == "/" and page.url.startsWith("/gallery/")) %}
-        <a href="{{ item.url }}"{% if isActive %} aria-current="true"{% endif %}>{{ item.label }}</a>
-      {% endfor %}
-    </div>
-    <button id="theme-toggle" aria-label="Switch color theme">dark</button>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="/">{{ site.name }}</a>
+    <nav>
+      <div class="menu">
+        {% for category in categories %}
+          <a href="/gallery/{{ category.slug }}/"{% if page.url == "/gallery/" + category.slug + "/" %} aria-current="true"{% endif %}>{{ category.title }}</a>
+        {% endfor %}
+        {% for item in site.nav %}
+          <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="true"{% endif %}>{{ item.label }}</a>
+        {% endfor %}
+      </div>
+      <button id="theme-toggle" aria-label="Switch color theme">dark</button>
+    </nav>
+  </div>
 </header>

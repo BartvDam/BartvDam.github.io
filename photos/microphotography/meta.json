@@ -1,7 +1,7 @@
 {
-  "title": "Microscopy",
+  "title": "Microphotography",
   "description": "Photomicrography through the lens of a light microscope — diatoms, pollen, crystals and other small-scale subjects.",
-  "accent": "#0f6e56",
-  "cover": "2026-01-05-diatom-frustule.jpg",
+  "accent": { "light": "#0f6e56", "dark": "#74c7b0" },
+  "cover": "2025-03-09-dagpauwoog-2.jpg",
   "order": 2
 }

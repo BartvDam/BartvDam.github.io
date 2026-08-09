@@ -10,11 +10,11 @@ eleventyComputed:
   title: "{{ category.title }}"
   description: "{{ category.description }}"
 ---
-<div class="gal">
+<div class="gal"{% if category.accentLight %} style="--hl-light:{{ category.accentLight }};{% if category.accentDark %}--hl-dark:{{ category.accentDark }};{% endif %}"{% endif %}>
   <div class="gal-head">
-    <h1 class="page-heading"{% if category.accent %} style="--cat-accent:{{ category.accent }};"{% endif %}><span class="dot"></span>{{ category.title }}</h1>
+    <h1 class="page-heading"><span class="dot"></span>{{ category.title }}</h1>
+    {% if category.description %}<p class="page-description">{{ category.description }}</p>{% endif %}
   </div>
-  {% if category.description %}<p class="page-description">{{ category.description }}</p>{% endif %}
   <div class="justified-gallery">
     {% for photo in category.photos %}
       {% galleryItem photo %}

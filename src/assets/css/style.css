@@ -6,13 +6,13 @@
   --mut: #6e7268;
   --shadow: rgba(32, 38, 31, 0.12);
   --default-accent: #6e5a3d;
-  /* Used for the "in the field / under the microscope" hero copy specifically. */
-  --bird: #b0562a;
-  --micro: #0f6e56;
+  /* Rectangle stroke drawn over photos on hover -- semi-transparent so it
+     reads reasonably against most photo content, tuned per theme below. */
+  --frame-line: rgba(32, 38, 31, 0.6);
   --serif: "Fraunces", Georgia, serif;
   --sans: "Atkinson Hyperlegible", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --gap: 10px;
+  --gap: 14px;
 }
 
 html[data-theme="dark"] {
@@ -23,8 +23,7 @@ html[data-theme="dark"] {
   --mut: #98a09e;
   --shadow: rgba(0, 0, 0, 0.45);
   --default-accent: #c9b28a;
-  --bird: #d9b67f;
-  --micro: #74c7b0;
+  --frame-line: rgba(236, 232, 220, 0.65);
 }
 
 * {
@@ -67,21 +66,44 @@ h3 {
   border-radius: 2px;
 }
 
+/* Per-category accent, theme-resolved. Elements carrying inline
+   --hl-light/--hl-dark (set from a category's meta.json) resolve to --hl,
+   which descendants (dots, tags, corner accents) read via var(--hl, ...). */
+.door,
+.gal {
+  --hl: var(--hl-light, var(--default-accent));
+}
+
+html[data-theme="dark"] .door,
+html[data-theme="dark"] .gal {
+  --hl: var(--hl-dark, var(--hl-light, var(--default-accent)));
+}
+
 /* ---------- Header / nav ---------- */
 
 header {
   position: sticky;
   top: 0;
   z-index: 30;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter: blur(7px);
+  border-bottom: 1px solid var(--line);
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 26px;
+}
+
+header .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
   flex-wrap: wrap;
-  padding: 13px 26px;
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
-  backdrop-filter: blur(7px);
-  border-bottom: 1px solid var(--line);
+  padding-top: 13px;
+  padding-bottom: 13px;
 }
 
 .brand {
@@ -101,7 +123,7 @@ nav {
 .menu {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 22px;
   flex-wrap: wrap;
 }
 
@@ -111,19 +133,15 @@ nav {
   letter-spacing: 0.05em;
   color: var(--mut);
   text-decoration: none;
-  padding: 6px 11px;
-  border-radius: 999px;
-  transition: color 0.2s, background 0.2s;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
 }
 
-.menu a:hover {
-  color: var(--ink);
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-}
-
+.menu a:hover,
 .menu a[aria-current="true"] {
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--ink);
+  border-color: var(--default-accent);
 }
 
 #theme-toggle {
@@ -165,64 +183,54 @@ nav {
   margin-bottom: 2.5rem;
 }
 
-/* ---------- Hero (full-width doors with overlaid title) ---------- */
+/* ---------- Hero head (eyebrow + title) ---------- */
+
+.hero-head {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 26px 0;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--mut);
+  margin-bottom: 14px;
+}
+
+.hero-head h1 {
+  font-size: clamp(36px, 5.6vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- About blurb (two columns, above the doors) ---------- */
+
+.intro-cols {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 26px 44px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.intro-cols p {
+  font-size: 17px;
+}
+
+/* ---------- Doors (homepage category links) ---------- */
 
 .hero-full {
   position: relative;
   display: flex;
-  height: min(80vh, 720px);
-  min-height: 460px;
-}
-
-.hero-title {
-  position: absolute;
-  left: 50%;
-  top: 44%;
-  transform: translate(-50%, -50%);
-  z-index: 4;
-  text-align: center;
-  pointer-events: none;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
-  color: #f4f1e8;
-}
-
-.hero-title h1 {
-  font-size: clamp(38px, 6.5vw, 72px);
-  line-height: 1.05;
-}
-
-.hero-title .range {
-  font-family: var(--mono);
-  font-size: clamp(12px, 1.6vw, 14px);
-  letter-spacing: 0.14em;
-  margin-top: 10px;
-}
-
-.range .b {
-  color: var(--bird, var(--default-accent));
-}
-.range .m {
-  color: var(--micro, var(--default-accent));
-}
-
-/* ---------- About blurb (below hero) ---------- */
-
-.intro-section {
-  max-width: 700px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 56px 26px 40px;
+  padding: 0 26px 24px;
+  height: min(48vh, 430px);
+  min-height: 280px;
 }
-
-.intro-section p {
-  max-width: 60ch;
-  font-size: 17px;
-}
-
-.intro-section p + p {
-  margin-top: 12px;
-}
-
-/* ---------- Doors (homepage category links) ---------- */
 
 .door {
   position: relative;
@@ -234,8 +242,18 @@ nav {
   transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.door:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.door:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.door:only-child {
+  border-radius: 8px;
+}
+
 .door:hover {
-  flex: 1.35;
+  flex: 1.3;
 }
 
 .door::after {
@@ -267,7 +285,7 @@ nav {
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.07em;
-  color: var(--door-accent, var(--default-accent));
+  color: var(--hl, var(--default-accent));
 }
 
 .seam {
@@ -352,14 +370,28 @@ nav {
 /* ---------- Gallery pages ---------- */
 
 .gal-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: end;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
-  margin-bottom: 6px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.gal-head .page-heading {
+  margin: 0;
+}
+
+.gal-head .page-description {
+  margin: 0;
+  max-width: 48ch;
+}
+
+@media (max-width: 720px) {
+  .gal-head {
+    grid-template-columns: 1fr;
+  }
 }
 
 .page-heading .dot {
@@ -369,7 +401,7 @@ nav {
   border-radius: 50%;
   margin-right: 12px;
   vertical-align: 2px;
-  background: var(--cat-accent, var(--default-accent));
+  background: var(--hl, var(--default-accent));
 }
 
 .justified-gallery {
@@ -381,24 +413,92 @@ nav {
 .gallery-item {
   position: relative;
   display: block;
-  overflow: hidden;
   text-decoration: none;
   /* Sized in JS once row-packing runs; these are just sane pre-layout defaults. */
   width: 300px;
   height: 260px;
 }
 
-.gallery-item img {
+.ph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* The photo + its caption shrink inward together on hover, vacating a
+   margin band for .hover-box (a sibling, sized to .ph) to frame around. */
+.photo-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition: inset 0.2s ease;
+}
+
+.gallery-item:hover .photo-inner,
+.gallery-item:focus-within .photo-inner {
+  inset: 8px;
+}
+
+.photo-inner picture {
+  position: absolute;
+  inset: 0;
+}
+
+.ph img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0%);
-  transition: filter 0.3s ease, transform 0.4s ease;
 }
 
-.gallery-item:hover img {
-  filter: grayscale(100%);
-  transform: scale(1.03);
+/* Hover rectangle: sits at the photo's own edge, in the margin the photo
+   just vacated above -- framing it rather than overlapping it. Sized to
+   match exactly, so it can't touch a neighboring photo's rectangle either. */
+.hover-box {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--frame-line);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery-item:hover .hover-box,
+.gallery-item:focus-within .hover-box {
+  opacity: 1;
+}
+
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.corner.tl {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--hl, var(--default-accent));
+  border-left: 1px solid var(--hl, var(--default-accent));
+}
+.corner.tr {
+  top: -1px;
+  right: -1px;
+  border-top: 1px solid var(--hl, var(--default-accent));
+  border-right: 1px solid var(--hl, var(--default-accent));
+}
+.corner.bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 1px solid var(--hl, var(--default-accent));
+  border-left: 1px solid var(--hl, var(--default-accent));
+}
+.corner.br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid var(--hl, var(--default-accent));
+  border-right: 1px solid var(--hl, var(--default-accent));
 }
 
 .gallery-item-caption {
@@ -409,13 +509,30 @@ nav {
   padding: 10px 12px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
   color: #f4f1e8;
-  font-size: 0.85rem;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.gallery-item:hover .gallery-item-caption {
+.gallery-item:hover .gallery-item-caption,
+.gallery-item:focus-within .gallery-item-caption {
   opacity: 1;
+  transform: translateY(0);
+}
+
+.cap-title {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.cap-meta {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+  margin-top: 2px;
 }
 
 /* ---------- Blog index ---------- */
@@ -565,6 +682,11 @@ footer {
     max-width: 320px;
     margin: 0 auto;
   }
+
+  .intro-cols {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -576,7 +698,8 @@ footer {
   .blog,
   .about-wrap,
   .bstrip,
-  .intro-section {
+  .hero-head,
+  .intro-cols {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -585,11 +708,14 @@ footer {
     flex-direction: column;
     height: auto;
     min-height: 0;
+    padding: 0 16px 20px;
+    gap: 10px;
   }
 
   .door {
-    height: 40vh;
-    min-height: 260px;
+    height: 30vh;
+    min-height: 210px;
+    border-radius: 8px !important;
   }
 
   .door:hover {
@@ -597,12 +723,7 @@ footer {
   }
 
   .seam {
-    width: auto;
-    height: 1px;
-  }
-
-  .hero-title {
-    top: 50%;
+    display: none;
   }
 }
 

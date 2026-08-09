@@ -41,19 +41,40 @@ module.exports = function () {
       .sort()
       .reverse();
 
-    const photos = filenames.map((filename) => ({
-      absPath: path.join(folderPath, filename),
-      filename,
-      title: captions[filename] || titleFromFilename(filename),
-    }));
+    // captions.json entries can be a plain string (just a title) or an object
+    // { title, meta: [...] } -- meta is an ordered list of small overlay
+    // strings (focal length, aperture, magnification, whatever fits the
+    // category) shown on hover, joined with " · ".
+    const photos = filenames.map((filename) => {
+      const raw = captions[filename];
+      const isRich = raw && typeof raw === "object";
+      return {
+        absPath: path.join(folderPath, filename),
+        filename,
+        title: (isRich ? raw.title : raw) || titleFromFilename(filename),
+        meta: (isRich && Array.isArray(raw.meta)) ? raw.meta : [],
+      };
+    });
 
     const coverFilename = meta.cover && filenames.includes(meta.cover) ? meta.cover : filenames[0];
+
+    // accent can be a single hex string (same in both themes) or
+    // { light, dark } for a theme-appropriate pair.
+    let accentLight = null;
+    let accentDark = null;
+    if (typeof meta.accent === "string") {
+      accentLight = meta.accent;
+    } else if (meta.accent && typeof meta.accent === "object") {
+      accentLight = meta.accent.light || null;
+      accentDark = meta.accent.dark || null;
+    }
 
     return {
       slug,
       title: meta.title || titleFromFilename(slug),
       description: meta.description || "",
-      accent: meta.accent || null,
+      accentLight,
+      accentDark,
       order: typeof meta.order === "number" ? meta.order : 999,
       cover: coverFilename ? path.join(folderPath, coverFilename) : null,
       photos,

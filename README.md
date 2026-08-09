@@ -36,6 +36,24 @@ it — the next build picks them up automatically:
   ```json
   { "2026-03-01-grey-heron.jpg": "Grey heron, early morning light" }
   ```
+  For the richer hover overlay (title + a line of small metadata), use an
+  object instead of a plain string:
+  ```json
+  {
+    "2026-03-01-grey-heron.jpg": {
+      "title": "Grey heron",
+      "meta": ["500mm", "f/5.6", "IJssel, NL", "1/1000s"]
+    }
+  }
+  ```
+  `meta` is an ordered list of short strings, shown joined with " · " — put
+  whatever's relevant to that category (focal length/aperture/place/shutter
+  speed for wildlife; magnification/numerical aperture/illumination for
+  microscopy). It's free-form on purpose so every category can show different
+  fields. This has to be typed in by hand per photo — camera EXIF isn't read
+  automatically, and cramming it into the filename instead gets unreliable
+  fast (exposure times contain `/`, commas and spaces are ambiguous
+  delimiters, and different categories need different field counts).
 
 ### Adding or editing a category
 
@@ -47,9 +65,16 @@ description, homepage tile image, and ordering:
   "title": "Wildlife",
   "description": "Birds and other wildlife photographed in the field.",
   "cover": "2026-03-01-grey-heron.jpg",
+  "accent": { "light": "#b0562a", "dark": "#d9b67f" },
   "order": 2
 }
 ```
+
+`accent` is optional and colors that category's homepage door label, the dot
+next to its gallery heading, and the colorful corner accents shown when
+hovering its photos. It can be a single hex string (same color in both
+themes) or `{ "light": "...", "dark": "..." }` for a lighter tone in dark
+mode. Without it, a neutral default accent is used.
 
 All fields are optional — without a `meta.json`, the folder name is used as
 the title, the first photo (alphabetically) becomes the cover, and categories
@@ -91,7 +116,10 @@ and dev tools always work. What this site does instead, at zero extra cost:
 
 - **About page**: `src/about.njk` — replace the placeholder bio text and swap
   `src/assets/images/about-portrait.jpg` for a real photo.
-- **Site name/nav/social links**: `src/_data/site.js`.
+- **Site name/social links**: `src/_data/site.js`. The nav bar itself is a
+  link per category (auto-generated from `photos/`) followed by whatever's
+  listed in `site.js`'s `nav` array (Blog, About) — a new category folder
+  gets a nav link automatically, no edit needed here.
 - **Theme (colors, fonts, spacing)**: `src/assets/css/style.css`.
 - **Justified gallery row height / gap**: constants at the top of
   `src/assets/js/justified-gallery.js`.
