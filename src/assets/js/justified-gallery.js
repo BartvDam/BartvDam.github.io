@@ -2,20 +2,19 @@
 // gallery, à la Flickr/500px) using the aspect ratio baked into each item's
 // data-aspect-ratio attribute at build time -- no need to wait for images to
 // load to know how to lay them out.
+//
+// Every row's height floats freely to whatever value makes it fill the
+// container width exactly (portraits included -- a row containing one just
+// ends up a bit taller or shorter than the target, whatever the math needs).
+// The one exception is a genuinely wide outlier (a panorama): mixing one
+// into a row of normal photos drags that whole row's height down a lot, so
+// it gets isolated into its own row instead. Isolating it means the row(s)
+// immediately around it may get cut short before reaching the width
+// threshold naturally -- those forced/leftover rows are capped at the
+// target height rather than stretched, since a forced flush of very few
+// photos can otherwise compute an absurd height (e.g. one photo alone
+// stretched to fill the full row width).
 const TARGET_ROW_HEIGHT = 260;
-// Keep every row's height within this band around the target, even if an
-// outlier aspect ratio (a panorama, an extreme portrait) is in it -- a
-// consistent rhythm across rows reads as calmer than a strictly edge-to-edge
-// fill that lets one photo swing a row's height wildly. When a row is
-// clamped it simply doesn't reach the far edge, matching how the last row
-// (a genuinely partial row) already behaves.
-const MIN_ROW_HEIGHT_RATIO = 0.75;
-const MAX_ROW_HEIGHT_RATIO = 1.35;
-// A photo this wide (relative to the container, at target height) gets its
-// own row instead of being grouped with others -- mixing a panorama into a
-// row of normal photos drags that whole row's height down well outside the
-// calm band above. On its own it just renders as a shorter, wide strip,
-// which is the expected look for a panorama in a justified gallery.
 const OUTLIER_WIDTH_RATIO = 0.6;
 const GAP = 14; // must match --gap in style.css
 // Below this container width, drop row-packing entirely and stack photos in
@@ -31,45 +30,37 @@ function layoutSingleColumn(items, containerWidth) {
   });
 }
 
+function ratioOf(item) {
+  return parseFloat(item.dataset.aspectRatio || "1.5");
+}
+
 function layoutJustified(items, containerWidth) {
   let row = [];
   let ratioSum = 0;
 
-  const flush = (rowItems, isLastRow) => {
+  const flush = (rowItems, capAtTarget) => {
     if (!rowItems.length) return;
     const totalGap = GAP * (rowItems.length - 1);
-    const rowRatioSum = rowItems.reduce(
-      (sum, item) => sum + parseFloat(item.dataset.aspectRatio || "1.5"),
-      0
-    );
-    const exactFitHeight = (containerWidth - totalGap) / rowRatioSum;
-
-    const minHeight = TARGET_ROW_HEIGHT * MIN_ROW_HEIGHT_RATIO;
-    const maxHeight = isLastRow ? TARGET_ROW_HEIGHT : TARGET_ROW_HEIGHT * MAX_ROW_HEIGHT_RATIO;
-    let rowHeight = Math.min(Math.max(exactFitHeight, minHeight), maxHeight);
-
-    // Raising a too-short row up to minHeight assumes there's slack to do so
-    // without overflowing -- not true for a single extreme-wide outlier (a
-    // panorama can already exceed the container width well below minHeight).
-    // Fall back to the exact fit rather than let the row spill sideways.
-    if (rowHeight * rowRatioSum + totalGap > containerWidth) {
-      rowHeight = exactFitHeight;
+    const rowRatioSum = rowItems.reduce((sum, item) => sum + ratioOf(item), 0);
+    let rowHeight = (containerWidth - totalGap) / rowRatioSum;
+    if (capAtTarget) {
+      rowHeight = Math.min(rowHeight, TARGET_ROW_HEIGHT);
     }
 
     rowItems.forEach((item) => {
-      const ratio = parseFloat(item.dataset.aspectRatio || "1.5");
+      const ratio = ratioOf(item);
       item.style.height = `${rowHeight}px`;
       item.style.width = `${rowHeight * ratio}px`;
     });
   };
 
   items.forEach((item) => {
-    const ratio = parseFloat(item.dataset.aspectRatio || "1.5");
+    const ratio = ratioOf(item);
     const soloWidth = TARGET_ROW_HEIGHT * ratio;
     const isOutlier = soloWidth >= containerWidth * OUTLIER_WIDTH_RATIO;
 
     if (isOutlier && row.length > 0) {
-      flush(row, false);
+      flush(row, true); // forced pre-flush ahead of an outlier -- cap it
       row = [];
       ratioSum = 0;
     }
@@ -78,14 +69,18 @@ function layoutJustified(items, containerWidth) {
     ratioSum += ratio;
 
     const widthAtTargetHeight = TARGET_ROW_HEIGHT * ratioSum + GAP * (row.length - 1);
-    if (isOutlier || widthAtTargetHeight >= containerWidth) {
-      flush(row, false);
+    if (isOutlier) {
+      flush(row, true); // the outlier's own row -- cap too (rarely engages)
+      row = [];
+      ratioSum = 0;
+    } else if (widthAtTargetHeight >= containerWidth) {
+      flush(row, false); // reached full width naturally -- let it float freely
       row = [];
       ratioSum = 0;
     }
   });
 
-  flush(row, true);
+  flush(row, true); // true last row -- cap so a small leftover doesn't blow up
 }
 
 function layout(container) {

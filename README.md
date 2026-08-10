@@ -65,16 +65,9 @@ description, homepage tile image, and ordering:
   "title": "Wildlife",
   "description": "Birds and other wildlife photographed in the field.",
   "cover": "2026-03-01-grey-heron.jpg",
-  "accent": { "light": "#b0562a", "dark": "#d9b67f" },
   "order": 2
 }
 ```
-
-`accent` is optional and colors that category's homepage door label, the dot
-next to its gallery heading, and the colorful corner accents shown when
-hovering its photos. It can be a single hex string (same color in both
-themes) or `{ "light": "...", "dark": "..." }` for a lighter tone in dark
-mode. Without it, a neutral default accent is used.
 
 All fields are optional — without a `meta.json`, the folder name is used as
 the title, the first photo (alphabetically) becomes the cover, and categories
@@ -120,7 +113,22 @@ and dev tools always work. What this site does instead, at zero extra cost:
   link per category (auto-generated from `photos/`) followed by whatever's
   listed in `site.js`'s `nav` array (Blog, About) — a new category folder
   gets a nav link automatically, no edit needed here.
-- **Theme (colors, fonts, spacing)**: `src/assets/css/style.css`.
+- **Theme (colors, fonts, spacing)**: `src/assets/css/style.css`. All color
+  decisions live in the token blocks at the top of the file — page colors in
+  `:root` / `html[data-theme="dark"]`, and colors drawn on top of photos
+  (captions, the lightbox, per-category accents) in the `:root` block just
+  below them, kept as a single fixed value rather than switching with theme
+  since they always sit on their own dark scrim regardless of page theme.
+- **Per-category accent color**: also in `style.css` — add a token (e.g.
+  `--accent-newcategory: #hex;`) and a rule keying it to that category's
+  folder slug:
+  ```css
+  .door[data-slug="newcategory"],
+  .gal[data-slug="newcategory"] {
+    --hl: var(--accent-newcategory);
+  }
+  ```
+  A category with no matching rule just uses the neutral `--default-accent`.
 - **Justified gallery row height / gap**: constants at the top of
   `src/assets/js/justified-gallery.js`.
 

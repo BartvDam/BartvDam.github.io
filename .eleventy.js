@@ -11,15 +11,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("photos/");
   eleventyConfig.addWatchTarget("src/assets/");
 
-  // Builds the inline --hl-light/--hl-dark custom properties from a
-  // category's accent colors, resolved to the active theme by CSS.
-  function accentStyle(category) {
-    if (!category.accentLight) return "";
-    let style = `--hl-light:${category.accentLight};`;
-    if (category.accentDark) style += `--hl-dark:${category.accentDark};`;
-    return style;
-  }
-
   const esc = (str) => String(str).replace(/"/g, "&quot;");
 
   // Renders one gallery photo: responsive thumbnail markup + a plain link to
@@ -62,12 +53,13 @@ module.exports = function (eleventyConfig) {
   // Renders a homepage "door" -- a hover-expanding panel linking to one
   // category's gallery, with its cover photo as a CSS background image (not
   // an <img>, since it's a background panel rather than sized content).
+  // data-slug lets style.css key that category's accent color (see --hl).
   eleventyConfig.addAsyncShortcode("categoryDoor", async function (category) {
     const cover = await getThumb(category.cover, category.title);
     const count = category.photos.length;
 
-    return `<a class="door" href="/gallery/${category.slug}/"
-        style="background-image:url('${cover.url}');${accentStyle(category)}">
+    return `<a class="door" href="/gallery/${category.slug}/" data-slug="${category.slug}"
+        style="background-image:url('${cover.url}');">
       <span class="tag">
         <b>${category.title}</b>
         <small>${count} image${count === 1 ? "" : "s"}</small>

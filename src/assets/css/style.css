@@ -3,12 +3,24 @@
   --panel: #ffffff;
   --line: #e4dfd2;
   --ink: #20261f;
-  --mut: #6e7268;
+  --mut: #6f7368;
   --shadow: rgba(32, 38, 31, 0.12);
   --default-accent: #6e5a3d;
-  /* Vivid, fixed (not per-category) teal for the hover corner accents --
-     chosen specifically to stay clearly visible against most photo content. */
-  --corner-accent: #0d9488;
+  /* Text/scrim colors drawn ON TOP of photos (gallery hover captions, the
+     lightbox). Deliberately not redefined in the dark-theme block below --
+     they always sit on their own dark scrim for legibility regardless of
+     the page's light/dark theme, so they stay constant either way. */
+  --overlay-text: #f4f1e8;
+  --overlay-text-mut: #a6ab9e;
+  --overlay-scrim: rgba(0, 0, 0, 0.75);
+  /* Per-category accents, also overlaid on photos -- same reasoning, kept
+     as a single fixed color (the former dark-theme value of each) rather
+     than switching with theme. Wired to a category by folder slug below. */
+  --accent-bird: #d9b67f;
+  --accent-micro: #74c7b0;
+  /* Fixed (former dark-theme value of --default-accent) for the same
+     overlaid-on-photos reason -- used by the hover metadata text. */
+  --overlay-accent: #c9b28a;
   --serif: "Fraunces", Georgia, serif;
   --sans: "Atkinson Hyperlegible", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -23,7 +35,6 @@ html[data-theme="dark"] {
   --mut: #98a09e;
   --shadow: rgba(0, 0, 0, 0.45);
   --default-accent: #c9b28a;
-  --corner-accent: #5eead4;
 }
 
 * {
@@ -66,17 +77,22 @@ h3 {
   border-radius: 2px;
 }
 
-/* Per-category accent, theme-resolved. Elements carrying inline
-   --hl-light/--hl-dark (set from a category's meta.json) resolve to --hl,
-   which descendants (dots, tags, corner accents) read via var(--hl, ...). */
+/* Per-category accent, keyed by folder slug (data-slug, set on .door and
+   .gal). A category without a matching rule here just keeps the neutral
+   default -- add one more rule below to give a new category its own color. */
 .door,
 .gal {
-  --hl: var(--hl-light, var(--default-accent));
+  --hl: var(--default-accent);
 }
 
-html[data-theme="dark"] .door,
-html[data-theme="dark"] .gal {
-  --hl: var(--hl-dark, var(--hl-light, var(--default-accent)));
+.door[data-slug="bird-photography"],
+.gal[data-slug="bird-photography"] {
+  --hl: var(--accent-bird);
+}
+
+.door[data-slug="microphotography"],
+.gal[data-slug="microphotography"] {
+  --hl: var(--accent-micro);
 }
 
 /* ---------- Header / nav ---------- */
@@ -133,7 +149,9 @@ nav {
   letter-spacing: 0.05em;
   color: var(--mut);
   text-decoration: none;
-  padding-bottom: 3px;
+  /* Symmetric padding (not bottom-only) so this box's text lines up with
+     #theme-toggle's after nav's align-items:center centers both boxes. */
+  padding: 3px 0;
   border-bottom: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s;
 }
@@ -271,7 +289,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  color: #f4f1e8;
+  color: var(--overlay-text);
 }
 
 .door .tag b {
@@ -279,13 +297,14 @@ nav {
   font-weight: 600;
   font-size: clamp(22px, 3vw, 32px);
   line-height: 1.12;
+  color: var(--hl);
 }
 
 .door .tag small {
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.07em;
-  color: var(--hl, var(--default-accent));
+  color: var(--overlay-text);
 }
 
 /* ---------- From the blog (homepage strip) ---------- */
@@ -435,26 +454,26 @@ nav {
 .corner.tl {
   top: -1px;
   left: -1px;
-  border-top: 1px solid var(--corner-accent);
-  border-left: 1px solid var(--corner-accent);
+  border-top: 1px solid var(--mut);
+  border-left: 1px solid var(--mut);
 }
 .corner.tr {
   top: -1px;
   right: -1px;
-  border-top: 1px solid var(--corner-accent);
-  border-right: 1px solid var(--corner-accent);
+  border-top: 1px solid var(--mut);
+  border-right: 1px solid var(--mut);
 }
 .corner.bl {
   bottom: -1px;
   left: -1px;
-  border-bottom: 1px solid var(--corner-accent);
-  border-left: 1px solid var(--corner-accent);
+  border-bottom: 1px solid var(--mut);
+  border-left: 1px solid var(--mut);
 }
 .corner.br {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1px solid var(--corner-accent);
-  border-right: 1px solid var(--corner-accent);
+  border-bottom: 1px solid var(--mut);
+  border-right: 1px solid var(--mut);
 }
 
 .gallery-item-caption {
@@ -463,8 +482,8 @@ nav {
   right: 0;
   bottom: 0;
   padding: 10px 12px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
-  color: #f4f1e8;
+  background: linear-gradient(to top, var(--overlay-scrim), transparent);
+  color: var(--overlay-text);
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -487,7 +506,7 @@ nav {
   font-family: var(--mono);
   font-size: 0.7rem;
   letter-spacing: 0.03em;
-  color: #ffd166;
+  color: var(--overlay-accent);
   margin-top: 2px;
 }
 
@@ -710,13 +729,13 @@ footer {
   align-items: center;
   font-family: var(--mono);
   font-size: 12.5px;
-  color: #a6ab9e;
+  color: var(--overlay-text-mut);
 }
 
 .lb-x {
   font-size: 26px;
   line-height: 1;
-  color: #f2efe6;
+  color: var(--overlay-text);
   padding: 4px 10px;
 }
 
@@ -742,7 +761,7 @@ footer {
   top: 50%;
   transform: translateY(-50%);
   font-size: 30px;
-  color: #a6ab9e;
+  color: var(--overlay-text-mut);
   padding: 14px;
   transition: color 0.2s;
 }
@@ -755,7 +774,7 @@ footer {
 }
 
 .lb-nav:hover {
-  color: #f2efe6;
+  color: var(--overlay-text);
 }
 
 .lb-cap {
@@ -769,7 +788,7 @@ footer {
   font-family: var(--serif);
   font-size: 21px;
   font-weight: 600;
-  color: #f2efe6;
+  color: var(--overlay-text);
 }
 
 .lb-latin {
@@ -777,12 +796,12 @@ footer {
   font-style: italic;
   font-size: 15px;
   margin-top: 4px;
-  color: #f2efe6;
+  color: var(--overlay-text);
 }
 
 .lb-desc {
   font-size: 13.5px;
-  color: #a6ab9e;
+  color: var(--overlay-text-mut);
   line-height: 1.6;
   margin-top: 10px;
 }

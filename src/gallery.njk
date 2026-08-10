@@ -10,7 +10,7 @@ eleventyComputed:
   title: "{{ category.title }}"
   description: "{{ category.description }}"
 ---
-<div class="gal"{% if category.accentLight %} style="--hl-light:{{ category.accentLight }};{% if category.accentDark %}--hl-dark:{{ category.accentDark }};{% endif %}"{% endif %}>
+<div class="gal" data-slug="{{ category.slug }}">
   <div class="justified-gallery">
     {% for photo in category.photos %}
       {% galleryItem photo %}
