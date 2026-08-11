@@ -242,6 +242,8 @@ nav {
 
 .intro-cols p {
   font-size: 17px;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* ---------- Doors (homepage category links) ---------- */
@@ -530,6 +532,8 @@ nav {
 .post-body {
   max-width: 70ch;
   line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .post-body h2,
@@ -576,8 +580,9 @@ nav {
 }
 
 .about-body {
-  max-width: 65ch;
   line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .about-body p {
@@ -647,8 +652,7 @@ footer {
   padding: 52px 26px 80px;
 }
 
-.blog,
-.about-wrap {
+.blog {
   max-width: 860px;
 }
 
