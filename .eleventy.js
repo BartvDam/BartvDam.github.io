@@ -1,4 +1,6 @@
 const path = require("path");
+const fs = require("fs");
+const crypto = require("crypto");
 const { DateTime } = require("luxon");
 const { getThumb, getFull } = require("./src/_11ty/images.js");
 
@@ -10,6 +12,16 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addWatchTarget("photos/");
   eleventyConfig.addWatchTarget("src/assets/");
+
+  // Cache-busting: appends ?v=<content hash> to a /css or /js asset URL, so
+  // browsers (and any CDN) never serve a stale cached copy after a CSS/JS
+  // change ships -- the URL itself changes whenever the file's content does.
+  eleventyConfig.addFilter("assetUrl", (urlPath) => {
+    const absPath = path.join(__dirname, "src", "assets", urlPath.replace(/^\//, ""));
+    if (!fs.existsSync(absPath)) return urlPath;
+    const hash = crypto.createHash("md5").update(fs.readFileSync(absPath)).digest("hex").slice(0, 8);
+    return `${urlPath}?v=${hash}`;
+  });
 
   const esc = (str) => String(str).replace(/"/g, "&quot;");
 

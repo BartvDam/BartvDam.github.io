@@ -47,10 +47,26 @@ function layoutJustified(items, containerWidth) {
       rowHeight = Math.min(rowHeight, TARGET_ROW_HEIGHT);
     }
 
-    rowItems.forEach((item) => {
+    // When this row is meant to reach the container's right edge exactly,
+    // summing each item's independently-computed width can drift a
+    // fraction of a pixel past the container due to floating-point
+    // rounding -- and flex-wrap only needs that tiny an overflow to shove
+    // the last photo onto the next line, leaving a gap where it should
+    // have rendered. Make the last item absorb the remainder explicitly so
+    // the row's total width can never exceed the container. Skipped for a
+    // deliberately short/capped row, which isn't meant to fill the edge.
+    const targetRowWidth = containerWidth - totalGap;
+    const naturalRowWidth = rowHeight * rowRatioSum;
+    const fillsExactly = Math.abs(naturalRowWidth - targetRowWidth) < 1;
+
+    let usedWidth = 0;
+    rowItems.forEach((item, idx) => {
       const ratio = ratioOf(item);
       item.style.height = `${rowHeight}px`;
-      item.style.width = `${rowHeight * ratio}px`;
+      const isLast = idx === rowItems.length - 1;
+      const width = fillsExactly && isLast ? Math.max(0, targetRowWidth - usedWidth) : rowHeight * ratio;
+      item.style.width = `${width}px`;
+      usedWidth += width;
     });
   };
 
@@ -83,9 +99,17 @@ function layoutJustified(items, containerWidth) {
   flush(row, true); // true last row -- cap so a small leftover doesn't blow up
 }
 
+// Shave a hair off the measured width as a safety margin. The exact-fit
+// math above is provably correct in JS, but actual browser rendering can
+// still round sub-pixel/device-pixel values slightly differently than pure
+// arithmetic predicts -- enough, occasionally, for a row computed to fit
+// *exactly* to overflow by a hair once painted, which is all flex-wrap
+// needs to shove the last photo onto the next line.
+const RENDER_SAFETY_MARGIN = 1;
+
 function layout(container) {
   const items = Array.from(container.children);
-  const containerWidth = container.clientWidth;
+  const containerWidth = container.clientWidth - RENDER_SAFETY_MARGIN;
   if (!items.length || !containerWidth) return;
 
   if (containerWidth < MOBILE_BREAKPOINT) {

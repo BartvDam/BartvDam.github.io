@@ -12,7 +12,7 @@
       document.documentElement.dataset.theme = theme;
     })();
   </script>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ '/css/style.css' | assetUrl }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,10 +24,10 @@
   </main>
   {% include "partials/footer.njk" %}
   {% if needsGallery %}{% include "partials/lightbox.njk" %}{% endif %}
-  <script src="/js/theme-toggle.js" defer></script>
+  <script src="{{ '/js/theme-toggle.js' | assetUrl }}" defer></script>
   {% if needsGallery %}
-  <script src="/js/justified-gallery.js" defer></script>
-  <script src="/js/lightbox.js" defer></script>
+  <script src="{{ '/js/justified-gallery.js' | assetUrl }}" defer></script>
+  <script src="{{ '/js/lightbox.js' | assetUrl }}" defer></script>
   {% endif %}
 </body>
 </html>

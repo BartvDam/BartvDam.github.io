@@ -16,8 +16,9 @@
   /* Per-category accents, also overlaid on photos -- same reasoning, kept
      as a single fixed color (the former dark-theme value of each) rather
      than switching with theme. Wired to a category by folder slug below. */
+  --accent-micro: #7fb0c9;
   --accent-bird: #d9b67f;
-  --accent-micro: #74c7b0;
+  --accent-landscape: #74c7b0;
   /* Fixed (former dark-theme value of --default-accent) for the same
      overlaid-on-photos reason -- used by the hover metadata text. */
   --overlay-accent: #c9b28a;
@@ -93,6 +94,11 @@ h3 {
 .door[data-slug="microphotography"],
 .gal[data-slug="microphotography"] {
   --hl: var(--accent-micro);
+}
+
+.door[data-slug="landscapes"],
+.gal[data-slug="landscapes"] {
+  --hl: var(--accent-landscape);
 }
 
 /* ---------- Header / nav ---------- */
