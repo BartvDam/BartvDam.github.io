@@ -42,18 +42,59 @@ it — the next build picks them up automatically:
   {
     "2026-03-01-grey-heron.jpg": {
       "title": "Grey heron",
-      "meta": ["500mm", "f/5.6", "IJssel, NL", "1/1000s"]
+      "location": "IJssel, NL",
+      "meta": ["magnification/NA/illumination or whatever else fits the category"]
     }
   }
   ```
-  `meta` is an ordered list of short strings, shown joined with " · " — put
-  whatever's relevant to that category (focal length/aperture/place/shutter
-  speed for wildlife; magnification/numerical aperture/illumination for
-  microscopy). It's free-form on purpose so every category can show different
-  fields. This has to be typed in by hand per photo — camera EXIF isn't read
-  automatically, and cramming it into the filename instead gets unreliable
-  fast (exposure times contain `/`, commas and spaces are ambiguous
-  delimiters, and different categories need different field counts).
+  `meta` is an ordered list of short strings, shown joined with " · " —
+  free-form on purpose so every category can show different fields (e.g.
+  magnification/numerical aperture/illumination for microscopy). Focal
+  length/aperture/shutter speed aren't part of `meta` — see below, they're
+  usually parsed straight out of the filename.
+
+### Focal length / aperture / shutter speed from the filename
+
+Export photos from Lightroom with this filename template (Filename Template
+Editor, using the `Filename`, `Date (YYYYMMDD)`, `Focal Length` and
+`Exposure` tokens):
+
+```
+{Filename}_D{Date (YYYYMMDD)}_FL{Focal Length}_EX{Exposure}
+```
+
+which produces something like:
+
+```
+6A7A1345_D20250701_FL400 mm_EX1-2000 sec at f - 6.3.jpg
+```
+
+The build parses the `_D..._FL..._EX...` segment automatically and fills in
+focal length, aperture and shutter speed — no `captions.json` entry needed
+for those. It also uses the parsed date to sort the photo chronologically,
+so filenames don't need a `YYYY-MM-DD-` prefix once they're exported this
+way. Make sure Lightroom's decimal separator is `.` and not `,` (Windows:
+Control Panel → Region → Additional settings → Numbers → Decimal symbol),
+since a `,` in the filename won't parse as a valid aperture.
+
+A photo whose filename doesn't match this pattern (a phone photo, say) just
+gets no auto-filled spec fields — set them by hand in `captions.json` with
+`focalLength`, `aperture` and `shutterSpeed`:
+```json
+{
+  "IMG_20260301.jpg": {
+    "title": "Grey heron",
+    "focalLength": "500mm",
+    "aperture": "f/5.6",
+    "shutterSpeed": "1/1250s"
+  }
+}
+```
+Any of `focalLength`/`aperture`/`shutterSpeed` set in `captions.json`
+overrides the value parsed from the filename for that photo; if a value
+isn't in either place, it's just left out. See `photos/bird-photography/`,
+`photos/landscapes/` and `photos/microphotography/` for one real example of
+each case (filename-parsed vs. hand-set) per category.
 
 ### Adding or editing a category
 

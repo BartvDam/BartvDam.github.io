@@ -1,10 +1,12 @@
 {
-  "2024-01-04-bafa-golu-north.jpg": {
+  "IMG_5821_D20240104_FL24 mm_EX1-250 sec at f - 8.jpg": {
     "title": "Bafa Gölü, North Shore",
-    "description": "Photographed in the field — replace this with your own notes about the scene."
+    "location": "Muğla, Türkiye",
+    "description": "Photographed in the field — replace this with your own notes about the scene. This filename follows the EXIF-in-filename convention (see README), so focal length/aperture/shutter speed are parsed from it automatically."
   },
   "2024-01-04-bafa-golu-south.jpg": {
     "title": "Bafa Gölü, South Shore",
-    "description": "Photographed in the field — replace this with your own notes about the scene."
+    "location": "Muğla, Türkiye",
+    "description": "Photographed in the field — replace this with your own notes about the scene. This filename has no EXIF data in it, so no focal length/aperture/shutter speed pills show up here -- add focalLength/aperture/shutterSpeed fields to set them by hand."
   }
 }

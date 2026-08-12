@@ -16,9 +16,9 @@
   /* Per-category accents, also overlaid on photos -- same reasoning, kept
      as a single fixed color (the former dark-theme value of each) rather
      than switching with theme. Wired to a category by folder slug below. */
-  --accent-micro: #f4f1e8;/* #7fb0c9;*/
-  --accent-bird: #f4f1e8;/* #d9b67f;*/
-  --accent-landscape:#f4f1e8; /* #74c7b0; */
+  --accent-micro: #7fb0c9;
+  --accent-bird: #d9b67f;
+  --accent-landscape: #74c7b0;
   /* Fixed (former dark-theme value of --default-accent) for the same
      overlaid-on-photos reason -- used by the hover metadata text. */
   --overlay-accent: #c9b28a;
@@ -305,7 +305,7 @@ nav {
   font-weight: 600;
   font-size: clamp(22px, 3vw, 32px);
   line-height: 1.12;
-  color: var(--hl);
+  color: var(--overlay-text);
 }
 
 .door .tag small {
@@ -419,7 +419,7 @@ nav {
 }
 
 .gallery-item:hover .photo-inner,
-.gallery-item:focus-within .photo-inner {
+.gallery-item:focus-visible .photo-inner {
   inset: 8px;
 }
 
@@ -448,7 +448,7 @@ nav {
 }
 
 .gallery-item:hover .hover-box,
-.gallery-item:focus-within .hover-box {
+.gallery-item:focus-visible .hover-box {
   opacity: 1;
 }
 
@@ -498,7 +498,7 @@ nav {
 }
 
 .gallery-item:hover .gallery-item-caption,
-.gallery-item:focus-within .gallery-item-caption {
+.gallery-item:focus-visible .gallery-item-caption {
   opacity: 1;
   transform: translateY(0);
 }
@@ -756,7 +756,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0;
+  padding: 10px 0 0;
 }
 
 .lb-mid img {
@@ -787,33 +787,96 @@ footer {
   color: var(--overlay-text);
 }
 
+/* Category accent (--hl) is set inline per-photo by lightbox.js, read from
+   the clicked gallery item -- every rule below just consumes var(--hl). */
+/* Fixed height (rather than sized to content) so .lb-mid -- and the image
+   and nav arrows inside it -- stay put regardless of how much caption text
+   a given photo has. Longer-than-usual captions scroll instead of pushing
+   the image around. */
 .lb-cap {
+  flex: none;
+  height: 210px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   text-align: center;
   max-width: 640px;
   margin: 0 auto;
-  padding: 14px 16px 6px;
+  padding: 8px 16px 6px;
 }
 
-.lb-name {
+.lb-title {
   font-family: var(--serif);
   font-size: 21px;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--overlay-text);
 }
 
-.lb-latin {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 15px;
-  margin-top: 4px;
-  color: var(--overlay-text);
+.lb-title-sep {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0 8px;
+  color: var(--hl, var(--overlay-accent));
 }
 
-.lb-desc {
-  font-size: 13.5px;
+.lb-title-sec {
+  font-weight: 400;
+  font-size: 17px;
   color: var(--overlay-text-mut);
+}
+
+.lb-title-la {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--overlay-text-mut);
+}
+
+.lb-blurb {
+  font-size: 13.5px;
   line-height: 1.6;
-  margin-top: 10px;
+  color: var(--overlay-text-mut);
+  max-width: 52ch;
+  margin: 10px auto 0;
+}
+
+.lb-loc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--overlay-text-mut);
+}
+
+.lb-loc svg {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  opacity: 0.7;
+}
+
+.lb-specs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.lb-pill {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--hl, var(--overlay-accent));
+  border: 1px solid var(--hl, var(--overlay-accent));
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
 }
 
 @media (max-width: 720px) {

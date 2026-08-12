@@ -6,10 +6,44 @@ const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png"]);
 
 function titleFromFilename(filename) {
   const base = path.basename(filename, path.extname(filename));
+  // A Lightroom EXIF-in-filename export (see parseExifFromFilename) has no
+  // human-readable content to fall back to -- just the camera's own ID.
+  const marked = base.match(/^(.*)_D\d{8}_FL[\d.]+\s*mm_EX/i);
+  if (marked) {
+    return marked[1] || "Untitled";
+  }
   // Strip an optional leading date prefix, e.g. "2026-01-05-diatom.jpg"
   const withoutDate = base.replace(/^\d{4}-\d{2}-\d{2}-/, "");
   const spaced = withoutDate.replace(/[-_]+/g, " ").trim();
   return spaced.replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.slice(1));
+}
+
+// Parses EXIF values out of a Lightroom filename export using the template
+// "{Filename}_D{Date YYYYMMDD}_FL{Focal Length}_EX{Exposure}" (see README).
+// Photos not exported with that template just get all-null fields here, and
+// rely entirely on captions.json.
+function parseExifFromFilename(filename) {
+  const empty = { date: null, focalLength: null, shutterSpeed: null, aperture: null };
+  const base = path.basename(filename, path.extname(filename)).replace(/,/g, ".");
+  const match = base.match(/_D(\d{8})_FL([\d.]+)\s*mm_EX(.+)$/i);
+  if (!match) return empty;
+
+  const [, ymd, focal, exposure] = match;
+  const date = new Date(Date.UTC(+ymd.slice(0, 4), +ymd.slice(4, 6) - 1, +ymd.slice(6, 8)));
+  const focalLength = `${focal}mm`;
+
+  // Exposure renders as e.g. "1-2000 sec at f - 6.3" (Lightroom's combined
+  // "Exposure" token -- "/" replaced with "-" for filesystem safety).
+  let shutterSpeed = null;
+  let aperture = null;
+  const exposureMatch = exposure.match(/^(\d+)(?:-(\d+))?\s*sec\s+at\s+f\s*-\s*([\d.]+)/i);
+  if (exposureMatch) {
+    const [, numerator, denominator, fNumber] = exposureMatch;
+    shutterSpeed = denominator ? `${numerator}/${denominator}s` : `${numerator}s`;
+    aperture = `f/${fNumber}`;
+  }
+
+  return { date, focalLength, shutterSpeed, aperture };
 }
 
 function readJsonIfExists(filePath, fallback) {
@@ -34,31 +68,41 @@ module.exports = function () {
     const meta = readJsonIfExists(path.join(folderPath, "meta.json"), {});
     const captions = readJsonIfExists(path.join(folderPath, "captions.json"), {});
 
-    // Newest first -- relies on filenames being date-prefixed (see README).
-    // The justified-gallery layout handles whatever mix of aspect ratios
-    // falls into a row on its own (each row's height floats to fill the
-    // width exactly), so photos stay in pure chronological order here.
     const filenames = fs
       .readdirSync(folderPath)
-      .filter((f) => IMAGE_EXTENSIONS.has(path.extname(f).toLowerCase()))
-      .sort()
-      .reverse();
+      .filter((f) => IMAGE_EXTENSIONS.has(path.extname(f).toLowerCase()));
 
     // captions.json entries can be a plain string (just a title) or an
-    // object { title, meta: [...], nl, en, latin, description }. meta is
-    // an ordered list of small overlay strings (focal length, aperture,
-    // magnification, whatever fits the category) shown on hover, joined
-    // with " · ". The rest are optional and only used in the lightbox:
-    // nl/en become the "Dutch name · English name" heading, latin is
-    // shown in italic below it, and description below that.
+    // object { title, meta: [...], location, nl, en, latin, description,
+    // focalLength, aperture, shutterSpeed }. focalLength/aperture/
+    // shutterSpeed default to whatever parseExifFromFilename can read out of
+    // a Lightroom EXIF-in-filename export, and are overridden by an explicit
+    // captions.json value when present -- so most photos need no captions.json
+    // entry at all for those three fields. meta is an ordered list of extra
+    // technical spec strings that aren't camera EXIF (e.g. magnification/NA/
+    // illumination for microscopy) and gets appended after the EXIF ones.
+    // The combined list is shown as pills in the lightbox and joined with
+    // " · " for the grid's hover overlay (location gets appended there too,
+    // since that overlay only has room for one line). The rest are optional
+    // and only used in the lightbox: en/nl/latin build the title line,
+    // location gets a pin icon, description is the blurb underneath.
     const photos = filenames.map((filename) => {
       const raw = captions[filename];
       const isRich = raw && typeof raw === "object";
+      const exif = parseExifFromFilename(filename);
+
+      const focalLength = (isRich && raw.focalLength) || exif.focalLength || null;
+      const aperture = (isRich && raw.aperture) || exif.aperture || null;
+      const shutterSpeed = (isRich && raw.shutterSpeed) || exif.shutterSpeed || null;
+      const extraMeta = (isRich && Array.isArray(raw.meta)) ? raw.meta : [];
+
       return {
         absPath: path.join(folderPath, filename),
         filename,
+        date: exif.date,
         title: (isRich ? raw.title : raw) || titleFromFilename(filename),
-        meta: (isRich && Array.isArray(raw.meta)) ? raw.meta : [],
+        meta: [focalLength, aperture, shutterSpeed].filter(Boolean).concat(extraMeta),
+        location: (isRich && raw.location) || null,
         nl: (isRich && raw.nl) || null,
         en: (isRich && raw.en) || null,
         latin: (isRich && raw.latin) || null,
@@ -66,7 +110,20 @@ module.exports = function () {
       };
     });
 
-    const coverFilename = meta.cover && filenames.includes(meta.cover) ? meta.cover : filenames[0];
+    // Newest first. Photos exported with the EXIF-in-filename convention
+    // sort by that parsed date; photos without it (no captions.json date
+    // either) fall back to filename order, which still works out to
+    // chronological as long as the older YYYY-MM-DD- prefix convention is
+    // kept for those.
+    photos.sort((a, b) => {
+      if (a.date && b.date) return b.date - a.date;
+      if (a.date || b.date) return a.date ? -1 : 1;
+      return b.filename.localeCompare(a.filename);
+    });
+
+    const coverFilename = meta.cover && photos.some((p) => p.filename === meta.cover)
+      ? meta.cover
+      : (photos[0] && photos[0].filename);
 
     return {
       slug,

@@ -28,16 +28,17 @@ module.exports = function (eleventyConfig) {
   // Renders one gallery photo: responsive thumbnail markup + a plain link to
   // the capped/watermarked full-size version, which lightbox.js intercepts.
   // On hover: an inset rectangle with colorful corner accents plus an
-  // overlay with the title and an optional line of small metadata (focal
-  // length, magnification, whatever fits the category). The optional
-  // nl/en/latin/description fields ride along as data attributes purely for
-  // the lightbox's richer caption -- they don't affect the grid view.
+  // overlay with the title and a small metadata line (spec values, location
+  // appended). The optional nl/en/latin/description/location/meta fields
+  // ride along as data attributes purely for the lightbox's richer caption
+  // -- they don't otherwise affect the grid view.
   eleventyConfig.addAsyncShortcode("galleryItem", async function (photo) {
     const [thumb, full] = await Promise.all([getThumb(photo.absPath, photo.title), getFull(photo.absPath)]);
 
     const captionLines = [`<span class="cap-title">${photo.title}</span>`];
-    if (photo.meta && photo.meta.length) {
-      captionLines.push(`<span class="cap-meta">${esc(photo.meta.join(" · "))}</span>`);
+    const gridMeta = [...(photo.meta || []), photo.location].filter(Boolean);
+    if (gridMeta.length) {
+      captionLines.push(`<span class="cap-meta">${esc(gridMeta.join(" · "))}</span>`);
     }
 
     const dataAttrs = [
@@ -47,7 +48,9 @@ module.exports = function (eleventyConfig) {
     if (photo.nl) dataAttrs.push(`data-nl="${esc(photo.nl)}"`);
     if (photo.en) dataAttrs.push(`data-en="${esc(photo.en)}"`);
     if (photo.latin) dataAttrs.push(`data-latin="${esc(photo.latin)}"`);
+    if (photo.location) dataAttrs.push(`data-location="${esc(photo.location)}"`);
     if (photo.description) dataAttrs.push(`data-description="${esc(photo.description)}"`);
+    if (photo.meta && photo.meta.length) dataAttrs.push(`data-meta="${esc(JSON.stringify(photo.meta))}"`);
 
     return `<a class="gallery-item" href="${full.jpegUrl}" ${dataAttrs.join(" ")}>
       <div class="ph">

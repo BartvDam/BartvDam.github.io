@@ -1,138 +1,114 @@
 {
-  "2025-01-22-blauwe-reiger.jpg": {
-    "title": "Blauwe Reiger",
-    "meta": ["600mm", "f/6.3", "Polder, NL", "1/1000s"],
-    "nl": "Blauwe Reiger",
-    "en": "Grey Heron",
-    "latin": "Ardea cinerea",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+  "6A7A4538_D20260522_FL400 mm_EX1-3200 sec at f - 7.1.jpg": {
+    "title": "Black Tern",
+    "location": "Groene Jonker, Zuid-Holland, Netherlands",
+    "nl": "Zwarte stern",
+    "en": "Black Tern",
+    "latin": "Chlidonias niger",
+    "description": ""
   },
-  "2025-06-01-rosse-waaierstaart.jpg": {
-    "title": "Rosse Waaierstaart",
-    "meta": ["500mm", "f/5.6", "Extremadura, ES", "1/1600s"],
-    "nl": "Rosse Waaierstaart",
-    "en": "Rufous-tailed Scrub Robin",
-    "latin": "Cercotrichas galactotes",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+  "6A7A4473_D20260522_FL560 mm_EX1-2000 sec at f - 10.jpg": {
+    "title": "Black-tailed Godwit",
+    "location": "Groene Jonker, Zuid-Holland, Netherlands",
+    "nl": "Grutto",
+    "en": "Black-tailed Godwit",
+    "latin": "Limosa limosa",
+    "description": ""
   },
-  "2025-06-04-bijeneters.jpg": {
-    "title": "Bijeneters",
-    "meta": ["500mm", "f/5.6", "Extremadura, ES", "1/2000s"],
-    "nl": "Bijeneters",
-    "en": "European Bee-eaters",
-    "latin": "Merops apiaster",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-01-04-roodborst.jpg": {
-    "title": "Roodborst",
-    "meta": ["400mm", "f/5.6", "Tuin, NL", "1/500s"],
-    "nl": "Roodborst",
-    "en": "European Robin",
-    "latin": "Erithacus rubecula",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-02-07-blauwe-rotslijster.jpg": {
-    "title": "Blauwe Rotslijster",
-    "meta": ["600mm", "f/6.3", "Kustlijn, NL", "1/1250s"],
-    "nl": "Blauwe Rotslijster",
-    "en": "Blue Rock Thrush",
-    "latin": "Monticola solitarius",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-02-08-perzische-eekhoorn.jpg": {
-    "title": "Perzische Eekhoorn",
-    "meta": ["400mm", "f/5.0", "Park, NL", "1/800s"],
-    "nl": "Perzische Eekhoorn",
-    "en": "Caucasian Squirrel · not a bird",
-    "latin": "Sciurus anomalus",
-    "description": "Too photogenic to leave out, even though it doesn't have feathers."
-  },
-  "2026-02-08-zwarte-roodstaart.jpg": {
-    "title": "Zwarte Roodstaart",
-    "meta": ["500mm", "f/5.6", "Duinen, NL", "1/1000s"],
-    "nl": "Zwarte Roodstaart",
-    "en": "Black Redstart",
-    "latin": "Phoenicurus ochruros",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-02-09-tjiftjaf.jpg": {
-    "title": "Tjiftjaf",
-    "meta": ["400mm", "f/5.6", "Bos, NL", "1/640s"],
-    "nl": "Tjiftjaf",
-    "en": "Common Chiffchaff",
-    "latin": "Phylloscopus collybita",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-02-10-roodborst-tapuit.jpg": {
-    "title": "Roodborst Tapuit",
-    "meta": ["500mm", "f/5.6", "Heide, NL", "1/1000s"],
-    "nl": "Roodborsttapuit",
+  "6A7A4416_D20260522_FL560 mm_EX1-2000 sec at f - 8.0.jpg": {
+    "title": "European Stonechat",
+    "location": "Groene Jonker, Zuid-Holland, Netherlands",
+    "nl": "Roodborst tapuit",
     "en": "European Stonechat",
     "latin": "Saxicola rubicola",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+    "description": ""
   },
-  "2026-04-06-blauwborst.jpg": {
-    "title": "Blauwborst",
-    "meta": ["500mm", "f/5.6", "IJssel, NL", "1/1000s"],
-    "nl": "Blauwborst",
-    "en": "Bluethroat",
-    "latin": "Luscinia svecica",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-04-06-geoorde-fuut.jpg": {
-    "title": "Geoorde Fuut",
-    "meta": ["600mm", "f/6.3", "Plas, NL", "1/1250s"],
-    "nl": "Geoorde Fuut",
-    "en": "Black-necked Grebe",
-    "latin": "Podiceps nigricollis",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-04-06-kneu.jpg": {
-    "title": "Kneu",
-    "meta": ["400mm", "f/5.6", "Heide, NL", "1/800s"],
-    "nl": "Kneu",
-    "en": "Common Linnet",
-    "latin": "Linaria cannabina",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-05-03-zwarte-mees.jpg": {
-    "title": "Zwarte Mees",
-    "meta": ["400mm", "f/5.6", "Tuin, NL", "1/500s"],
-    "nl": "Zwarte Mees",
-    "en": "Coal Tit",
-    "latin": "Periparus ater",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
-  },
-  "2026-05-15-nijlgans.jpg": {
-    "title": "Nijlgans",
-    "meta": ["300mm", "f/4.0", "Gracht, NL", "1/640s"],
+  "6A7A4381_D20260514_FL560 mm_EX1-2000 sec at f - 8.0.jpg": {
+    "title": "Egyptian Goose",
+    "location": "Beatrixpark, Noord-Holland, Netherlands",
     "nl": "Nijlgans",
     "en": "Egyptian Goose",
     "latin": "Alopochen aegyptiaca",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+    "description": ""
   },
-  "2026-05-22-roodborst-tapuit.jpg": {
-    "title": "Roodborst Tapuit",
-    "meta": ["500mm", "f/5.6", "Heide, NL", "1/1250s"],
-    "nl": "Roodborsttapuit",
+  "6A7A4282_D20260503_FL560 mm_EX1-2000 sec at f - 8.0.jpg": {
+    "title": "Coal Tit",
+    "location": "Deelderwoud, Gelderland, Netherlands",
+    "nl": "Zwarte mees",
+    "en": "Coal Tit",
+    "latin": "Periparus ater",
+    "description": ""
+  },
+  "6A7A4082_D20260406_FL560 mm_EX1-2000 sec at f - 8.0.jpg": {
+    "title": "Black-necked Grebe",
+    "location": "Zuid-Kennemerland, Noord-Holland, Netherlands",
+    "nl": "Geoorde fuut",
+    "en": "Black-necked Grebe",
+    "latin": "Podiceps nigricollis",
+    "description": ""
+  },
+  "6A7A4041_D20260406_FL560 mm_EX1-2000 sec at f - 8.0.jpg": {
+    "title": "Common Linnet",
+    "location": "Zuid-Kennemerland, Noord-Holland, Netherlands",
+    "nl": "Kneu",
+    "en": "Common Linnet",
+    "latin": "Linaria cannabina",
+    "description": ""
+  },
+  "6A7A3941_D20260406_FL560 mm_EX1-1600 sec at f - 8.0.jpg": {
+    "title": "Bluethroat",
+    "location": "Zuid-Kennemerland, Noord-Holland, Netherlands",
+    "nl": "Blauwborst",
+    "en": "Bluethroat",
+    "latin": "Luscinia svecica",
+    "description": ""
+  },
+  "6A7A3869_D20260406_FL560 mm_EX1-1600 sec at f - 8.0.jpg": {
+    "title": "Bluethroat",
+    "location": "Zuid-Kennemerland, Noord-Holland, Netherlands",
+    "nl": "Blauwborst",
+    "en": "Bluethroat",
+    "latin": "Luscinia svecica",
+    "description": ""
+  },
+  "6A7A3850_D20260406_FL560 mm_EX1-1600 sec at f - 10.jpg": {
+    "title": "Bluethroat",
+    "location": "Zuid-Kennemerland, Noord-Holland, Netherlands",
+    "nl": "Blauwborst",
+    "en": "Bluethroat",
+    "latin": "Luscinia svecica",
+    "description": ""
+  },
+  "6A7A3629_D20260210_FL560 mm_EX1-1600 sec at f - 8.0.jpg": {
+    "title": "European Stonechat",
+    "location": "Azap Gölü, Aydın, Turkey",
+    "nl": "Roodborst tapuit",
     "en": "European Stonechat",
     "latin": "Saxicola rubicola",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+    "description": ""
   },
-  "2026-05-22-zwarte-stern.jpg": {
-    "title": "Zwarte Stern",
-    "meta": ["500mm", "f/5.6", "Moeras, NL", "1/2000s"],
-    "nl": "Zwarte Stern",
-    "en": "Black Tern",
-    "latin": "Chlidonias niger",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+  "6A7A3517_D20260209_FL560 mm_EX1-1600 sec at f - 8.0.jpg": {
+    "title": "European Stonechat",
+    "location": "Kalamaki, Aydın, Turkey",
+    "nl": "Roodborst tapuit",
+    "en": "European Stonechat",
+    "latin": "Saxicola rubicola",
+    "description": ""
   },
-  "2026-07-26-visdief.jpg": {
-    "title": "Visdief",
-    "meta": ["500mm", "f/4.5", "IJssel, NL", "1/2500s"],
-    "nl": "Visdief",
-    "en": "Common Tern",
-    "latin": "Sterna hirundo",
-    "description": "Photographed in the field — replace this with your own notes about the encounter."
+  "6A7A3405_D20260207_FL560 mm_EX1-800 sec at f - 8.0.jpg": {
+    "title": "Blue Rock Thrush",
+    "location": "Bafa Gölü, Aydın, Turkey",
+    "nl": "Blauwe rotslijster",
+    "en": "Blue Rock Thrush",
+    "latin": "Monticola solitarius",
+    "description": ""
+  },
+  "6A7A3314_D20260207_FL560 mm_EX1-1600 sec at f - 8.0.jpg": {
+    "title": "Black Redstart",
+    "location": "Bafa Gölü, Aydın, Turkey",
+    "nl": "Zwarte roodstaart",
+    "en": "Black Redstart",
+    "latin": "Phoenicurus ochruros",
+    "description": ""
   }
 }
