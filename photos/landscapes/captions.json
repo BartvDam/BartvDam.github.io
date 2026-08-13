@@ -1,12 +1,22 @@
 {
   "IMG_5821_D20240104_FL24 mm_EX1-250 sec at f - 8.jpg": {
-    "title": "Bafa Gölü, North Shore",
-    "location": "Muğla, Türkiye",
-    "description": "Photographed in the field — replace this with your own notes about the scene. This filename follows the EXIF-in-filename convention (see README), so focal length/aperture/shutter speed are parsed from it automatically."
+    "title": "Bafa Gölü & Serçin",
+    "location": "Serçin, Muğla, Türkiye",
+    "description": "View of Serçin village and lake Bafa from the western observation deck"
   },
   "2024-01-04-bafa-golu-south.jpg": {
     "title": "Bafa Gölü, South Shore",
     "location": "Muğla, Türkiye",
     "description": "Photographed in the field — replace this with your own notes about the scene. This filename has no EXIF data in it, so no focal length/aperture/shutter speed pills show up here -- add focalLength/aperture/shutterSpeed fields to set them by hand."
+  },
+  "6A7A0821-Enhanced-NR_D20250603_FL100 mm_EX1-4000 sec at f - 6.3.jpg": {
+    "title": "Boulders of Beşparmak",
+    "location": "Beşparmak, Muğla, Turkey",
+    "description": "Boulders on the east banks of lake bafa"
+  },
+  "6A7A0808-Enhanced-NR_D20250603_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
+    "title": "Blue rock thrush on Yedi monastry",
+    "location": "Beşparmak, Muğla, Turkey",
+    "description": "Blue rock thrush appearing in the ruins of the Yedi monastry"
   }
 }
