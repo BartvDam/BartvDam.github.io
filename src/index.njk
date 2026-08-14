@@ -3,20 +3,16 @@ layout: base.njk
 title: Home
 needsGallery: false
 ---
-<div class="hero-head">
-  <p class="eyebrow">photography · amsterdam</p>
-  <h1>{{ site.name }}</h1>
-</div>
-
-<div class="intro-cols">
-  <p>Photography grew out of my passion for nature and a fascination with optical microscopy and imaging techniques. This site is where I collect my photos — birds, microscopy, and landscapes — hoping they might inspire others and serve as a repository of memories. When the awe of the moment has long faded, the pictures bring back the memories: A walk in the woods, a landscape, or an unexpected sighting of an elusive bird...</p>
-  <p>I'm not particularly focused on the artistic side of photography — composition, unique perspectives — but I love the technical aspect: Working with the light, mastering the camera's controls, and getting the most out of autofocus to capture sharp images. I also enjoy tinkering, automating my analog microscope and browsing camera and lens technical specs. In the blogs I will share technical insights and knowledge databases that I benefitted from while expanding this hobby. </p>
-</div>
-
 <div class="hero-full">
   {% for category in categories %}
     {% categoryDoor category %}
   {% endfor %}
+</div>
+
+<div class="intro-cols">
+  <p>Photography grew naturally out of my passion for nature, bird watching and a fascination for optical microscopy and imaging techniques. On this website I collect the photos of landscapes, birds, and smaller lifeforms observed through the microscope I have taken over the years. The collection helps me memorize the places I've visited and track how my photography evolves. Hopefully it also passes along a bit of enthusiasm for nature and bird watching to whoever browses this website.</p>
+
+  <p>I'm drawn to the technical side of photography - working with the available light and mastering camera controls and autofocus for optimal sharpness. I can really lose myself in camera and lens specifications, photography tutorials or tinkering with my microscope. Online there are are some excellent knowledge databases available to fully dive into the technicalities of photography. In my blogs I will share the insights, platforms and tools that I have greatly benefitted from while expanding this hobby.</p>
 </div>
 
 <div class="bstrip">

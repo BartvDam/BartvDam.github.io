@@ -38,6 +38,16 @@ html[data-theme="dark"] {
   --default-accent: #c9b28a;
 }
 
+/* Always reserve the vertical scrollbar's width, whether or not the current
+   page is tall enough to need one -- otherwise centered content (header,
+   .gal, etc.) sits at a very slightly different horizontal position on a
+   short page vs. a tall one, which reads as everything "jumping" a few
+   pixels when navigating between galleries of different lengths. */
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -129,10 +139,28 @@ header .wrap {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
   font-family: var(--serif);
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--default-accent);
+}
+
+.brand-tag::before {
+  content: "·";
+  margin-right: 8px;
+  color: var(--mut);
 }
 
 nav {
@@ -152,7 +180,8 @@ nav {
 .menu a {
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--mut);
   text-decoration: none;
   /* Symmetric padding (not bottom-only) so this box's text lines up with
@@ -174,7 +203,12 @@ nav {
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 999px;
+  /* Fixed width (sized to the longer of "light"/"dark") so the pill doesn't
+     resize -- and shove the rest of the nav sideways -- when its label
+     changes on toggle. */
+  width: calc(5ch + 24px);
   padding: 6px 12px;
+  text-align: center;
   background: none;
   cursor: pointer;
 }
@@ -207,29 +241,7 @@ nav {
   margin-bottom: 2.5rem;
 }
 
-/* ---------- Hero head (eyebrow + title) ---------- */
-
-.hero-head {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 56px 26px 0;
-}
-
-.eyebrow {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  color: var(--mut);
-  margin-bottom: 14px;
-}
-
-.hero-head h1 {
-  font-size: clamp(36px, 5.6vw, 60px);
-  line-height: 1.04;
-  letter-spacing: -0.01em;
-}
-
-/* ---------- About blurb (two columns, above the doors) ---------- */
+/* ---------- About blurb (two columns, below the doors) ---------- */
 
 .intro-cols {
   max-width: 1180px;
@@ -241,7 +253,8 @@ nav {
 }
 
 .intro-cols p {
-  font-size: 17px;
+  font-size: 15.5px;
+  color: var(--mut);
   text-align: justify;
   hyphens: auto;
 }
@@ -251,8 +264,9 @@ nav {
 .hero-full {
   position: relative;
   display: flex;
+  gap: var(--gap);
   max-width: 1180px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding: 0 26px 24px;
   height: min(48vh, 430px);
   min-height: 280px;
@@ -262,20 +276,11 @@ nav {
   position: relative;
   flex: 1;
   overflow: hidden;
+  border-radius: 8px;
   text-decoration: none;
   background-size: cover;
   background-position: center;
   transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.door:first-child {
-  border-radius: 8px 0 0 8px;
-}
-.door:last-child {
-  border-radius: 0 8px 8px 0;
-}
-.door:only-child {
-  border-radius: 8px;
 }
 
 .door:hover {
@@ -683,7 +688,6 @@ footer {
   .blog,
   .about-wrap,
   .bstrip,
-  .hero-head,
   .intro-cols {
     padding-left: 16px;
     padding-right: 16px;
@@ -700,7 +704,6 @@ footer {
   .door {
     height: 30vh;
     min-height: 210px;
-    border-radius: 8px !important;
   }
 
   .door:hover {
