@@ -4,7 +4,10 @@ layout: base.njk
 <div class="blog">
   <article class="post-body">
     <h1 class="page-heading">{{ title }}</h1>
-    <p class="post-meta">{{ date | readableDate }}</p>
+    <div class="post-meta">
+      <span>{{ date | readableDate }}</span>
+      {% for tag in tags %}{% if tag != "post" %}<span class="tag-pill" data-tag="{{ tag | lower }}">{{ tag }}</span>{% endif %}{% endfor %}
+    </div>
     {{ content | safe }}
   </article>
 </div>

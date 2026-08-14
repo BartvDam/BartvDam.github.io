@@ -2,6 +2,7 @@
 title: Welcome to the blog
 date: 2026-01-15
 description: How this blog works and how to add new posts.
+tags: [Landscape, Gear]
 ---
 
 This is the first post, and also the template for every post after it.
@@ -15,3 +16,15 @@ for you.
 
 The filename becomes the URL slug, so `welcome-to-the-blog.md` becomes
 `/blog/welcome-to-the-blog/`.
+
+Add an optional `tags` list, like this post has, to show colored pills next
+to the date. `Birds`, `Microscopy` and `Landscape` (case-insensitive) pick
+up the same accent color as their gallery; any other tag — like `Gear`
+above — just gets a neutral pill.
+
+To add an image, drop the file into `src/assets/images/blog/` and reference
+it with regular markdown:
+
+```markdown
+![A sunrise over the dunes](/images/blog/dune-sunrise.jpg)
+```

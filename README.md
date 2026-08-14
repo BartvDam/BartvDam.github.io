@@ -148,13 +148,25 @@ Create a markdown file anywhere under `src/posts/`:
 title: My new post
 date: 2026-05-01
 description: One-line summary shown on the blog index (optional).
+tags: [Birds, Gear]
 ---
 
 Post body in regular markdown.
+
+![A sunrise over the dunes](/images/blog/dune-sunrise.jpg)
 ```
 
 It shows up at `/blog/<filename-without-extension>/` and is listed on `/blog/`
 automatically, newest first.
+
+`tags` is optional and shows as colored pills next to the date, both on
+`/blog/` and the post itself. `Birds`, `Microscopy` and `Landscape`
+(case-insensitive) pick up the same fixed accent color as their gallery; any
+other tag just gets a neutral pill.
+
+For images, drop the file into `src/assets/images/blog/` and reference it
+with regular markdown (`![alt text](/images/blog/filename.jpg)`) anywhere in
+the post body, as in the example above.
 
 ## Image protection
 

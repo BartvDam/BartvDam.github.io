@@ -24,7 +24,13 @@ const OUTLIER_WIDTH_RATIO = 0.6;
 const GAP = 14; // must match --gap in style.css
 // Below this container width, drop row-packing entirely and stack photos in
 // a single full-width column instead -- trying to fit 2+ narrow columns on a
-// phone screen makes for awkward, cramped rows.
+// phone screen makes for awkward, cramped rows. Deliberately NOT raised to
+// also cover a phone turned sideways: single-column's height is width/ratio,
+// and a landscape phone is wide but short, so a single column there makes
+// each photo taller than the whole viewport -- you'd only ever see a partial
+// slice of one photo at a time instead of a proper grid. Row-packing (with
+// the short-landscape caption tweak below to keep captions from taking over)
+// gives properly-sized photos instead.
 const MOBILE_BREAKPOINT = 700;
 
 function layoutSingleColumn(items, containerWidth) {

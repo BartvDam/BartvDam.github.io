@@ -2,6 +2,7 @@
 title: Welcome to the blog
 date: 2026-01-15
 description: How this blog works and how to add new posts.
+tags: [Birds]
 ---
 
 This is the first post, and also the template for every post after it.

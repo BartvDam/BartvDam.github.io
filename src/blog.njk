@@ -9,7 +9,10 @@ permalink: "blog/index.html"
   <div class="post-list">
     {% for post in collections.postsByDate %}
     <a class="post" href="{{ post.url }}">
-      <div class="pd">{{ post.data.date | readableDate }}</div>
+      <div class="pd-row">
+        <div class="pd">{{ post.data.date | readableDate }}</div>
+        {% for tag in post.data.tags %}{% if tag != "post" %}<span class="tag-pill" data-tag="{{ tag | lower }}">{{ tag }}</span>{% endif %}{% endfor %}
+      </div>
       <h3>{{ post.data.title }}</h3>
       {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
     </a>
