@@ -92,9 +92,31 @@ gets no auto-filled spec fields — set them by hand in `captions.json` with
 ```
 Any of `focalLength`/`aperture`/`shutterSpeed` set in `captions.json`
 overrides the value parsed from the filename for that photo; if a value
-isn't in either place, it's just left out. See `photos/bird-photography/`,
-`photos/landscapes/` and `photos/microphotography/` for one real example of
-each case (filename-parsed vs. hand-set) per category.
+isn't in either place, it's just left out.
+
+### Magnification / NA / illumination from the filename (microscopy)
+
+Microscopy shots use their own filename convention (no Lightroom export
+involved), following the same idea:
+
+```
+{Filename}_D{Date (YYYYMMDD)}-M{Magnification}X_ILL{Illumination}_NA{Numerical Aperture}
+```
+
+which produces something like:
+
+```
+Z124_D20250309-M25X_ILLDarkfield_NA0.25.jpg
+```
+
+`_NA{...}` is optional (skip it if your setup doesn't report numerical
+aperture). The build parses this into magnification, illumination and NA
+pills automatically, and uses the parsed date for sorting, same as above.
+Override any of the three by hand in `captions.json` with `magnification`,
+`illumination` and `na`. The date segment must be exactly 8 digits
+(`YYYYMMDD`) — an extra or missing digit breaks the whole match and the
+photo silently gets no auto-filled fields at all, so double check it if a
+photo's pills don't show up.
 
 ### Adding or editing a category
 

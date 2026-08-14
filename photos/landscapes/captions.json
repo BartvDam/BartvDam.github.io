@@ -1,22 +1,27 @@
 {
-  "IMG_5821_D20240104_FL24 mm_EX1-250 sec at f - 8.jpg": {
+  "focus_stack_0432_D20160311_FL18 mm_EX1-400 sec at f - 11.jpg": {
     "title": "Bafa Gölü & Serçin",
     "location": "Serçin, Muğla, Türkiye",
-    "description": "View of Serçin village and lake Bafa from the western observation deck"
-  },
-  "2024-01-04-bafa-golu-south.jpg": {
-    "title": "Bafa Gölü, South Shore",
-    "location": "Muğla, Türkiye",
-    "description": "Photographed in the field — replace this with your own notes about the scene. This filename has no EXIF data in it, so no focal length/aperture/shutter speed pills show up here -- add focalLength/aperture/shutterSpeed fields to set them by hand."
+    "description": "View of Serçin village and lake Bafa from the western observation deck. Lake Bafa is a refuge to many bird species and has beautiful views. "
   },
   "6A7A0821-Enhanced-NR_D20250603_FL100 mm_EX1-4000 sec at f - 6.3.jpg": {
     "title": "Boulders of Beşparmak",
     "location": "Beşparmak, Muğla, Turkey",
-    "description": "Boulders on the east banks of lake bafa"
+    "description": "Rock formations on the banks of lake Bafa"
   },
   "6A7A0808-Enhanced-NR_D20250603_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
-    "title": "Blue rock thrush on Yedi monastry",
+    "title": "Blue rock thrush on Yedi Uyurlar Monastery",
     "location": "Beşparmak, Muğla, Turkey",
-    "description": "Blue rock thrush appearing in the ruins of the Yedi monastry"
+    "description": "Blue rock thrush appearing on the ruins of the Yedi Uyurlar Monastery"
+  },
+  "164444phone_D20260207_FL23mm_EX1-1163 sec at f - 1.8.jpg": {
+    "title": "Beşparmak view from Latmos ruins",
+    "location": "Beşparmak, Muğla, Türkiye",
+    "description": "View of the Besparmark mountains from the Latmos ruins"
+  },
+  "phone_D20260207_FL23mm_EX1-2786 sec at f - 1.8.jpg": {
+    "title": "Beşparmak rock formations",
+    "location": "Beşparmak, Muğla, Türkiye",
+    "description": "View of the Besparmark mountains from the Latmos ruins"
   }
 }

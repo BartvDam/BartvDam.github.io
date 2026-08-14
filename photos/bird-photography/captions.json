@@ -168,45 +168,131 @@
     "description": ""
   },
   "6A7A1000_D20250604_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
-    "title": "Bijeneter",
+    "title": "European Bee-eater",
     "location": "Serçin, Aydın, Turkey",
     "nl": "Bijeneter",
+    "en": "European Bee-eater",
+    "latin": "Merops apiaster",
     "description": ""
   },
   "6A7A0997-Enhanced-NR_D20250604_FL400 mm_EX1-2500 sec at f - 8.0.jpg": {
-    "title": "Bijeneter",
+    "title": "European Bee-eater",
     "location": "Serçin, Aydın, Turkey",
     "nl": "Bijeneter",
+    "en": "European Bee-eater",
+    "latin": "Merops apiaster",
     "description": ""
   },
   "6A7A0911-Enhanced-NR_D20250603_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
-    "title": "Hardoen",
+    "title": "Starred Agama",
     "location": "Latmos, Aydın, Turkey",
     "nl": "Hardoen",
+    "en": "Starred Agama",
+    "latin": "Stellagama stellio",
     "description": ""
   },
   "6A7A0884-Enhanced-NR_D20250603_FL400 mm_EX1-3200 sec at f - 6.3.jpg": {
-    "title": "Roodkopklauwier",
+    "title": "Woodchat Shrike",
     "location": "Beşparmak, Muğla, Turkey",
     "nl": "Roodkopklauwier",
+    "en": "Woodchat Shrike",
+    "latin": "Lanius senator",
     "description": ""
   },
   "6A7A0694-Enhanced-NR_D20250601_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
-    "title": "Rosse waaierstaart",
+    "title": "Rufous-tailed Scrub Robin",
     "location": "Milet, Aydın, Turkey",
     "nl": "Rosse waaierstaart",
+    "en": "Rufous-tailed Scrub Robin",
+    "latin": "Cercotrichas galactotes",
     "description": ""
   },
   "6A7A0609-Enhanced-NR_D20250601_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
-    "title": "Boerenzwaluw",
+    "title": "Barn Swallow",
     "location": "Serçin, Aydın, Turkey",
     "nl": "Boerenzwaluw",
+    "en": "Barn Swallow",
+    "latin": "Hirundo rustica",
     "description": ""
   },
   "6A7A0559-Enhanced-NR_D20250601_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
-    "title": "Flamingo",
+    "title": "Greater Flamingo",
     "location": "Bafa Gölü, Aydın, Turkey",
     "nl": "Flamingo",
+    "en": "Greater Flamingo",
+    "latin": "Phoenicopterus roseus",
+    "description": ""
+  },
+  "6A7A0380-Enhanced-NR_D20250504_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
+    "title": "Sedge Warbler",
+    "location": "Volgermeerpolder, Noord-Holland, Netherlands",
+    "nl": "Rietzanger",
+    "en": "Sedge Warbler",
+    "latin": "Acrocephalus schoenobaenus",
+    "description": ""
+  },
+  "6A7A0201_D20250407_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
+    "title": "Egyptian Goose",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Nijlgans",
+    "en": "Egyptian Goose",
+    "latin": "Alopochen aegyptiaca",
+    "description": ""
+  },
+  "6A7A0099-Enhanced-NR_D20250407_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
+    "title": "Common Wood Pigeon",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Houtduif",
+    "en": "Common Wood Pigeon",
+    "latin": "Columba palumbus",
+    "description": ""
+  },
+  "6A7A9870-Enhanced-NR_D20250302_FL400 mm_EX1-1600 sec at f - 5.6.jpg": {
+    "title": "European Robin",
+    "location": "Planken Wambuis, Gelderland, Netherlands",
+    "nl": "Roodborst",
+    "en": "European Robin",
+    "latin": "Erithacus rubecula",
+    "description": ""
+  },
+  "6A7A9774-Enhanced-NR_D20250202_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
+    "title": "Grey Heron",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Blauwe reiger",
+    "en": "Grey Heron",
+    "latin": "Ardea cinerea",
+    "description": ""
+  },
+  "6A7A9601-Enhanced-NR_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+    "title": "European Robin",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Roodborst",
+    "en": "European Robin",
+    "latin": "Erithacus rubecula",
+    "description": ""
+  },
+  "6A7A9580-Enhanced-NR_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+    "title": "Common Chaffinch",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Vink",
+    "en": "Common Chaffinch",
+    "latin": "Fringilla coelebs",
+    "description": ""
+  },
+  "CANON1300D__2810_D20241027_FL400 mm_EX1-640 sec at f - 5.6.jpg": {
+    "title": "Common Chaffinch",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Vink",
+    "en": "Common Chaffinch",
+    "latin": "Fringilla coelebs",
+    "description": ""
+  },
+  "CANON1300D__2910_D20241124_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+    "title": "Long-tailed Tit",
+    "location": "Westerpark, Noord-Holland, Netherlands",
+    "nl": "Staartmees",
+    "en": "Long-tailed Tit",
+    "latin": "Aegithalos caudatus",
     "description": ""
   }
 }

@@ -11,9 +11,14 @@
 // it gets isolated into its own row instead. Isolating it means the row(s)
 // immediately around it may get cut short before reaching the width
 // threshold naturally -- those forced/leftover rows are capped at the
-// target height rather than stretched, since a forced flush of very few
-// photos can otherwise compute an absurd height (e.g. one photo alone
-// stretched to fill the full row width).
+// previous row's actual height (falling back to the target height if
+// there's no previous row yet) rather than stretched, since a forced flush
+// of very few photos can otherwise compute an absurd height (e.g. one photo
+// alone stretched to fill the full row width). Matching the previous row's
+// height specifically -- rather than a flat constant -- keeps a leftover
+// row reading as part of the same grid instead of randomly bigger or
+// smaller, since a full row's floated height is often quite different from
+// the target depending on how many photos happened to fit in it.
 const TARGET_ROW_HEIGHT = 260;
 const OUTLIER_WIDTH_RATIO = 0.6;
 const GAP = 14; // must match --gap in style.css
@@ -37,6 +42,7 @@ function ratioOf(item) {
 function layoutJustified(items, containerWidth) {
   let row = [];
   let ratioSum = 0;
+  let previousRowHeight = TARGET_ROW_HEIGHT;
 
   const flush = (rowItems, capAtTarget) => {
     if (!rowItems.length) return;
@@ -44,7 +50,7 @@ function layoutJustified(items, containerWidth) {
     const rowRatioSum = rowItems.reduce((sum, item) => sum + ratioOf(item), 0);
     let rowHeight = (containerWidth - totalGap) / rowRatioSum;
     if (capAtTarget) {
-      rowHeight = Math.min(rowHeight, TARGET_ROW_HEIGHT);
+      rowHeight = Math.min(rowHeight, previousRowHeight);
     }
 
     // When this row is meant to reach the container's right edge exactly,
@@ -68,6 +74,8 @@ function layoutJustified(items, containerWidth) {
       item.style.width = `${width}px`;
       usedWidth += width;
     });
+
+    previousRowHeight = rowHeight;
   };
 
   items.forEach((item) => {

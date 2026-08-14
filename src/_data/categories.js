@@ -6,9 +6,11 @@ const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png"]);
 
 function titleFromFilename(filename) {
   const base = path.basename(filename, path.extname(filename));
-  // A Lightroom EXIF-in-filename export (see parseExifFromFilename) has no
-  // human-readable content to fall back to -- just the camera's own ID.
-  const marked = base.match(/^(.*)_D\d{8}_FL[\d.]+\s*mm_EX/i);
+  // An EXIF-in-filename export (see parseExifFromFilename /
+  // parseMicroExifFromFilename) has no human-readable content to fall back
+  // to -- just the camera's own ID / the shot's own ID.
+  const marked =
+    base.match(/^(.*)_D\d{8}_FL[\d.]+\s*mm_EX/i) || base.match(/^(.*)_D\d{8}-M[\d.]+X_ILL/i);
   if (marked) {
     return marked[1] || "Untitled";
   }
@@ -46,6 +48,26 @@ function parseExifFromFilename(filename) {
   return { date, focalLength, shutterSpeed, aperture };
 }
 
+// Parses magnification/NA/illumination out of a microscopy filename using
+// the template "{Filename}_D{Date YYYYMMDD}-M{Magnification}X_ILL{Illumination}
+// [_NA{Numerical Aperture}]" (NA is optional -- not every setup reports it).
+function parseMicroExifFromFilename(filename) {
+  const empty = { date: null, magnification: null, na: null, illumination: null };
+  const base = path.basename(filename, path.extname(filename)).replace(/,/g, ".");
+  const match = base.match(/_D(\d{8})-M([\d.]+)X_ILL([A-Za-z]+)(?:_NA([\d.]+))?/i);
+  if (!match) return empty;
+
+  const [, ymd, magnification, illumination, na] = match;
+  const date = new Date(Date.UTC(+ymd.slice(0, 4), +ymd.slice(4, 6) - 1, +ymd.slice(6, 8)));
+
+  return {
+    date,
+    magnification: `${magnification}×`,
+    illumination,
+    na: na ? `NA ${na}` : null,
+  };
+}
+
 function readJsonIfExists(filePath, fallback) {
   if (fs.existsSync(filePath)) {
     return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -74,13 +96,15 @@ module.exports = function () {
 
     // captions.json entries can be a plain string (just a title) or an
     // object { title, meta: [...], location, nl, en, latin, description,
-    // focalLength, aperture, shutterSpeed }. focalLength/aperture/
-    // shutterSpeed default to whatever parseExifFromFilename can read out of
-    // a Lightroom EXIF-in-filename export, and are overridden by an explicit
-    // captions.json value when present -- so most photos need no captions.json
-    // entry at all for those three fields. meta is an ordered list of extra
-    // technical spec strings that aren't camera EXIF (e.g. magnification/NA/
-    // illumination for microscopy) and gets appended after the EXIF ones.
+    // focalLength, aperture, shutterSpeed, magnification, na, illumination }.
+    // focalLength/aperture/shutterSpeed default to whatever
+    // parseExifFromFilename can read out of a Lightroom EXIF-in-filename
+    // export, and magnification/na/illumination default to whatever
+    // parseMicroExifFromFilename can read out of a microscopy filename --
+    // either way an explicit captions.json value overrides the parsed one,
+    // so most photos need no captions.json entry at all for those fields.
+    // meta is an ordered list of extra technical spec strings that aren't
+    // derived from the filename, and gets appended after the derived ones.
     // The combined list is shown as pills in the lightbox and joined with
     // " · " for the grid's hover overlay (location gets appended there too,
     // since that overlay only has room for one line). The rest are optional
@@ -90,18 +114,24 @@ module.exports = function () {
       const raw = captions[filename];
       const isRich = raw && typeof raw === "object";
       const exif = parseExifFromFilename(filename);
+      const micro = parseMicroExifFromFilename(filename);
 
       const focalLength = (isRich && raw.focalLength) || exif.focalLength || null;
       const aperture = (isRich && raw.aperture) || exif.aperture || null;
       const shutterSpeed = (isRich && raw.shutterSpeed) || exif.shutterSpeed || null;
+      const magnification = (isRich && raw.magnification) || micro.magnification || null;
+      const na = (isRich && raw.na) || micro.na || null;
+      const illumination = (isRich && raw.illumination) || micro.illumination || null;
       const extraMeta = (isRich && Array.isArray(raw.meta)) ? raw.meta : [];
 
       return {
         absPath: path.join(folderPath, filename),
         filename,
-        date: exif.date,
+        date: exif.date || micro.date,
         title: (isRich ? raw.title : raw) || titleFromFilename(filename),
-        meta: [focalLength, aperture, shutterSpeed].filter(Boolean).concat(extraMeta),
+        meta: [focalLength, aperture, shutterSpeed, magnification, na, illumination]
+          .filter(Boolean)
+          .concat(extraMeta),
         location: (isRich && raw.location) || null,
         nl: (isRich && raw.nl) || null,
         en: (isRich && raw.en) || null,

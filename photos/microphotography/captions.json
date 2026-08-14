@@ -1,32 +1,44 @@
 {
-  "IMG_0456_D20250309_FL100 mm_EX1-200 sec at f - 5.6.jpg": {
-    "title": "Dagpauwoog Wing Scales I",
-    "meta": ["100×", "NA 0.25", "Brightfield"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique. This filename follows the EXIF-in-filename convention (see README): focal length/aperture/shutter speed are parsed from it and shown ahead of the magnification/NA/illumination pills above, which still have to be typed in by hand."
+  "Z122_D20250309-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "European Peacock",
+    "nl": "Dagpauwoog vlinder",
+    "en": "European Peacock",
+    "latin": "Aglais io",
+    "description": "Dark field image of a butterfly's wing"
   },
-  "2025-03-09-dagpauwoog-2.jpg": {
-    "title": "Dagpauwoog Wing Scales II",
-    "meta": ["200×", "NA 0.40", "Darkfield"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique. This filename has no EXIF data in it, so only the hand-typed magnification/NA/illumination pills show up."
+  "Z123_D20250309-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "European Peacock",
+    "nl": "Dagpauwoog vlinder",
+    "en": "European Peacock",
+    "latin": "Aglais io",
+    "description": "Dark field image of a butterfly's wing"
   },
-  "2025-03-09-dagpauwoog-3.jpg": {
-    "title": "Dagpauwoog Wing Scales III",
-    "meta": ["400×", "NA 0.65", "Darkfield"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  "Z124_D20250309-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "European Peacock",
+    "nl": "Dagpauwoog vlinder",
+    "en": "European Peacock",
+    "latin": "Aglais io",
+    "description": "Dark field image of a butterfly's wing"
   },
-  "2025-03-09-dagpauwoog-4.jpg": {
-    "title": "Dagpauwoog Wing Scales IV",
-    "meta": ["400×", "NA 0.65", "Polarized light"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  "Z125_D20250309-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "European Peacock",
+    "nl": "Dagpauwoog vlinder",
+    "en": "European Peacock",
+    "latin": "Aglais io",
+    "description": "Dark field image of a butterfly's wing"
   },
-  "2025-07-24-vlaamse-gaai-veer.jpg": {
-    "title": "Vlaamse Gaai Veer",
-    "meta": ["100×", "NA 0.25", "Brightfield"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  "Z126_D20250324-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "Eurasian Jay",
+    "nl": "Vlaamse gaai",
+    "en": "Eurasian Jay",
+    "latin": "Garrulus glandarius",
+    "description": "Dark field image of a Jay's feather"
   },
-  "2025-08-30-zonnebloem-stamper.jpg": {
-    "title": "Zonnebloem Stamper",
-    "meta": ["40×", "NA 0.10", "Brightfield"],
-    "description": "Photographed through the microscope — replace this with your own notes on the sample and technique."
+  "Z130_D20250830-M25X_ILLDarkfield_NA0.25.jpg": {
+    "title": "Sunflower",
+    "nl": "Zonnebloem",
+    "en": "Sunflower",
+    "latin": "Helianthus annuus",
+    "description": "Dark field image of a sunflower disc floret"
   }
 }
