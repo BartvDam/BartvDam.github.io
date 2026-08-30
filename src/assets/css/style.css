@@ -5,7 +5,11 @@
   --ink: #20261f;
   --mut: #6f7368;
   --shadow: rgba(32, 38, 31, 0.12);
-  --default-accent: #6e5a3d;
+  /* Single shared accent for the brand tag ("Photography") and the active
+     nav-menu underline -- dark theme keeps the original yellow-gold below,
+     but that reads too faint against the light --paper, so light theme
+     gets its own dark red instead. */
+  --default-accent: #8a3324;
   /* Text/scrim colors drawn ON TOP of photos (gallery hover captions, the
      lightbox). Deliberately not redefined in the dark-theme block below --
      they always sit on their own dark scrim for legibility regardless of
@@ -972,16 +976,50 @@ footer {
     font-size: 0.6rem;
   }
 
+  /* A landscape phone has width to spare but almost no height, so stacking
+     the caption below the image (the normal layout) leaves barely anything
+     for the photo itself. Switch .lb to a grid so the caption becomes a
+     narrow right-hand sidebar instead -- full height, no competition with
+     the image for the scarce vertical space -- while .lb-top still spans
+     across the top as a full-width bar. Grid areas let this reflow happen
+     without needing separate markup for the two layouts. */
+  .lb.on {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "top top"
+      "mid cap";
+    gap: 0 12px;
+  }
+
+  .lb-top {
+    grid-area: top;
+  }
+
+  .lb-mid {
+    grid-area: mid;
+    padding-top: 6px;
+  }
+
   /* .lb-cap's height is normally a fixed 210px (see above, to stop it
      resizing .lb-mid/the image between photos with different amounts of
-     caption text) -- on a short landscape viewport that fixed box alone can
-     eat most of the screen, squeezing the actual photo down to a sliver.
-     Shrink it hard and drop the longest optional field (the blurb) so the
-     image gets most of the space back; title, location and spec pills still
-     fit in the smaller box, and it still scrolls if they don't. */
+     caption text) -- here it's a sidebar instead, so it takes the grid
+     row's full height rather than a fixed one. All of the caption's fields
+     stay -- title, blurb, location, pills -- it just scrolls internally
+     (overflow-y: auto, inherited from the base .lb-cap rule) if there isn't
+     room for all of it in one screen's height. Left-aligned rather than
+     centered, since a narrow sidebar reads better that way, and bottom-
+     justified so it starts flush with the bottom edge of the photo next to
+     it rather than the top of the sidebar.  */
   .lb-cap {
-    height: 108px;
-    padding: 4px 12px;
+    grid-area: cap;
+    height: auto;
+    max-width: none;
+    margin: 0;
+    padding: 6px 4px;
+    text-align: left;
+    justify-content: flex-end;
   }
 
   .lb-title {
@@ -989,14 +1027,16 @@ footer {
   }
 
   .lb-blurb {
-    display: none;
+    max-width: none;
   }
 
   .lb-loc {
+    justify-content: flex-start;
     margin-top: 6px;
   }
 
   .lb-specs {
+    justify-content: flex-start;
     margin-top: 6px;
   }
 }
