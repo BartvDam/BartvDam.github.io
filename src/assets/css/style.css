@@ -3,7 +3,9 @@
   --panel: #ffffff;
   --line: #e4dfd2;
   --ink: #20261f;
-  --mut: #6f7368;
+  /* Darker than before -- closer to --ink -- for readability; this drives
+     most body copy (intro/about text) and the nav menu at rest. */
+  --mut: #4c5046;
   --shadow: rgba(32, 38, 31, 0.12);
   /* Single shared accent for the brand tag ("Photography") and the active
      nav-menu underline -- dark theme keeps the original yellow-gold below,
@@ -37,7 +39,9 @@ html[data-theme="dark"] {
   --panel: #1b2129;
   --line: #2a323c;
   --ink: #ece8dc;
-  --mut: #98a09e;
+  /* Lighter than before -- closer to --ink -- for readability, same reason
+     as light theme's darker --mut above. */
+  --mut: #b4bbb6;
   --shadow: rgba(0, 0, 0, 0.45);
   --default-accent: #c9b28a;
 }
@@ -610,28 +614,50 @@ nav {
 
 /* ---------- About ---------- */
 
+/* Text column (2fr) left, image column (1fr) on the right -- works out to
+   the photos being roughly 1/3 of the available width, the text 2/3.
+   .about-photos comes first in the markup but is reordered to the right
+   visually via `order`, rather than reordering the HTML. */
 .about-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 340px) 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
   align-items: start;
 }
 
-.about-layout img {
+.about-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  order: 2;
+}
+
+/* Full width of its (1/3-of-total) column, original aspect ratio (no
+   cropping). */
+.about-photo {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  height: auto;
   border-radius: 6px;
   border: 1px solid var(--line);
 }
 
+/* Same treatment as .intro-cols p on the homepage: smaller and muted
+   instead of full-strength ink, so it reads as quieter supporting text.
+   Fixed two-column flow -- since the text column is 2fr against the photo
+   column's 1fr, each of these two columns ends up close to the photo
+   column's own width. */
 .about-body {
+  order: 1;
   line-height: 1.7;
   text-align: justify;
   hyphens: auto;
+  column-count: 2;
+  column-gap: 2rem;
 }
 
 .about-body p {
+  font-size: 15.5px;
+  color: var(--mut);
   margin-bottom: 1.1rem;
 }
 
@@ -709,9 +735,14 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .about-layout img {
-    max-width: 320px;
+  .about-photos {
+    flex-direction: row;
+    max-width: 420px;
     margin: 0 auto;
+  }
+
+  .about-body {
+    column-count: 1;
   }
 
   .intro-cols {
