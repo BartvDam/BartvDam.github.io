@@ -4,7 +4,7 @@ module.exports = {
   description:
     "Photography portfolio spanning microscopy and wildlife, plus a blog about the gear and process behind the images.",
   nav: [
-    { label: "Blog", url: "/blog/" },
+    // { label: "Blog", url: "/blog/" }, // no posts written yet
     { label: "About", url: "/about/" },
   ],
   social: [
