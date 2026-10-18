@@ -689,6 +689,43 @@ nav {
   padding: 0.1em 0.4em;
 }
 
+.about-body h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  margin: 1.4rem 0 0.6rem;
+}
+
+.about-body h3:first-child {
+  margin-top: 0;
+}
+
+.about-body ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.1rem;
+}
+
+.about-body li {
+  position: relative;
+  padding-left: 1.1em;
+  font-size: 15.5px;
+  color: var(--mut);
+  line-height: 1.5;
+}
+
+.about-body li + li {
+  margin-top: 0.3rem;
+}
+
+.about-body li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--default-accent);
+}
+
 .about-heading {
   font-family: var(--serif);
   font-weight: 600;
