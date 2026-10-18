@@ -800,17 +800,23 @@ footer {
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 900px) {
+/* Wider than the other 900px breakpoint below -- a phone's landscape width
+   can reach ~930px on the largest current models, so this needs to be high
+   enough to still catch "phone sideways" (not just portrait), stacking the
+   photos into one column in both orientations instead of the two-column
+   grid taking over on the biggest phones. */
+@media (max-width: 960px) {
   .about-layout {
     grid-template-columns: 1fr;
   }
 
   .about-photos {
-    flex-direction: row;
-    max-width: 420px;
+    max-width: 310px;
     margin: 0 auto;
   }
+}
 
+@media (max-width: 900px) {
   .intro-cols {
     grid-template-columns: 1fr;
     gap: 16px;

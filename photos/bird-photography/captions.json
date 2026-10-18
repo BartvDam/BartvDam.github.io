@@ -175,7 +175,7 @@
     "latin": "Merops apiaster",
     "description": ""
   },
-  "6A7A0997-Enhanced-NR_D20250604_FL400 mm_EX1-2500 sec at f - 8.0.jpg": {
+  "6A7A0997_D20250604_FL400 mm_EX1-2500 sec at f - 8.0.jpg": {
     "title": "European Bee-eater",
     "location": "Serçin, Aydın, Turkey",
     "nl": "Bijeneter",
@@ -183,7 +183,7 @@
     "latin": "Merops apiaster",
     "description": ""
   },
-  "6A7A0911-Enhanced-NR_D20250603_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
+  "6A7A0911_D20250603_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
     "title": "Starred Agama",
     "location": "Latmos, Aydın, Turkey",
     "nl": "Hardoen",
@@ -191,7 +191,7 @@
     "latin": "Stellagama stellio",
     "description": ""
   },
-  "6A7A0884-Enhanced-NR_D20250603_FL400 mm_EX1-3200 sec at f - 6.3.jpg": {
+  "6A7A0884_D20250603_FL400 mm_EX1-3200 sec at f - 6.3.jpg": {
     "title": "Woodchat Shrike",
     "location": "Beşparmak, Muğla, Turkey",
     "nl": "Roodkopklauwier",
@@ -199,7 +199,7 @@
     "latin": "Lanius senator",
     "description": ""
   },
-  "6A7A0694-Enhanced-NR_D20250601_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
+  "6A7A0694_D20250601_FL400 mm_EX1-2000 sec at f - 6.3.jpg": {
     "title": "Rufous-tailed Scrub Robin",
     "location": "Milet, Aydın, Turkey",
     "nl": "Rosse waaierstaart",
@@ -207,7 +207,7 @@
     "latin": "Cercotrichas galactotes",
     "description": ""
   },
-  "6A7A0609-Enhanced-NR_D20250601_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
+  "6A7A0609_D20250601_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
     "title": "Barn Swallow",
     "location": "Serçin, Aydın, Turkey",
     "nl": "Boerenzwaluw",
@@ -215,7 +215,7 @@
     "latin": "Hirundo rustica",
     "description": ""
   },
-  "6A7A0559-Enhanced-NR_D20250601_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+  "6A7A0559_D20250601_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
     "title": "Greater Flamingo",
     "location": "Bafa Gölü, Aydın, Turkey",
     "nl": "Flamingo",
@@ -223,7 +223,7 @@
     "latin": "Phoenicopterus roseus",
     "description": ""
   },
-  "6A7A0380-Enhanced-NR_D20250504_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
+  "6A7A0380_D20250504_FL400 mm_EX1-2000 sec at f - 7.1.jpg": {
     "title": "Sedge Warbler",
     "location": "Volgermeerpolder, Noord-Holland, Netherlands",
     "nl": "Rietzanger",
@@ -239,7 +239,7 @@
     "latin": "Alopochen aegyptiaca",
     "description": ""
   },
-  "6A7A0099-Enhanced-NR_D20250407_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
+  "6A7A0099_D20250407_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
     "title": "Common Wood Pigeon",
     "location": "Westerpark, Noord-Holland, Netherlands",
     "nl": "Houtduif",
@@ -247,7 +247,7 @@
     "latin": "Columba palumbus",
     "description": ""
   },
-  "6A7A9870-Enhanced-NR_D20250302_FL400 mm_EX1-1600 sec at f - 5.6.jpg": {
+  "6A7A9870_D20250302_FL400 mm_EX1-1600 sec at f - 5.6.jpg": {
     "title": "European Robin",
     "location": "Planken Wambuis, Gelderland, Netherlands",
     "nl": "Roodborst",
@@ -255,7 +255,7 @@
     "latin": "Erithacus rubecula",
     "description": ""
   },
-  "6A7A9774-Enhanced-NR_D20250202_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
+  "6A7A9774_D20250202_FL400 mm_EX1-2000 sec at f - 5.6.jpg": {
     "title": "Grey Heron",
     "location": "Westerpark, Noord-Holland, Netherlands",
     "nl": "Blauwe reiger",
@@ -263,7 +263,7 @@
     "latin": "Ardea cinerea",
     "description": ""
   },
-  "6A7A9601-Enhanced-NR_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+  "6A7A9601_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
     "title": "European Robin",
     "location": "Westerpark, Noord-Holland, Netherlands",
     "nl": "Roodborst",
@@ -271,7 +271,7 @@
     "latin": "Erithacus rubecula",
     "description": ""
   },
-  "6A7A9580-Enhanced-NR_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
+  "6A7A9580_D20250111_FL400 mm_EX1-1000 sec at f - 5.6.jpg": {
     "title": "Common Chaffinch",
     "location": "Westerpark, Noord-Holland, Netherlands",
     "nl": "Vink",
@@ -301,6 +301,14 @@
     "nl": "Wintertaling",
     "en": "Eurasian teal",
     "latin": "Anas crecca",
+    "description": ""
+  },
+  "6A7A4762_D20260726_FL400 mm_EX1-2500 sec at f - 10.jpg": {
+    "title": "Common tern",
+    "location": "Markerwadden, Flevoland, Netherlands",
+    "nl": "Visdief",
+    "en": "Common tern",
+    "latin": "Sterna paradisaea",
     "description": ""
   }
 }
