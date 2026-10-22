@@ -53,6 +53,10 @@ module.exports = function (eleventyConfig) {
     if (photo.location) dataAttrs.push(`data-location="${esc(photo.location)}"`);
     if (photo.description) dataAttrs.push(`data-description="${esc(photo.description)}"`);
     if (photo.meta && photo.meta.length) dataAttrs.push(`data-meta="${esc(JSON.stringify(photo.meta))}"`);
+    // href stays the jpeg (a real image for non-JS visitors, right-click-save,
+    // etc.) -- lightbox.js prefers the smaller webp for the actual in-page
+    // view, falling back to this jpeg if webp somehow fails to load.
+    dataAttrs.push(`data-webp="${full.webpUrl}"`);
 
     return `<a class="gallery-item" href="${full.jpegUrl}" ${dataAttrs.join(" ")}>
       <div class="ph">

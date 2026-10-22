@@ -70,7 +70,18 @@ if (lb) {
 
   const render = () => {
     const item = items[index];
-    img.src = item.getAttribute("href");
+    // Prefer the smaller webp; fall back to the jpeg (href) if it 404s or
+    // the browser can't decode it for some reason.
+    img.onerror = null;
+    if (item.dataset.webp) {
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = item.getAttribute("href");
+      };
+      img.src = item.dataset.webp;
+    } else {
+      img.src = item.getAttribute("href");
+    }
     img.alt = item.dataset.title || "";
     count.textContent = (index + 1) + " / " + items.length;
 
