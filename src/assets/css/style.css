@@ -228,6 +228,13 @@ nav {
   animation: fadeIn 0.5s ease both;
 }
 
+/* Index page only -- nudges the doors down from flush-under-the-header
+   towards vertical center, without fully centering (padding-top rather than
+   flex justify-content: center, so it's a partial shift, not dead center). */
+.content-home {
+  padding-top: 6vh;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
